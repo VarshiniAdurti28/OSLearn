@@ -1,0 +1,24 @@
+{% extends 'file_allocation/fa_base.html' %}
+
+{% block link %}
+<script src="/static/js/file_allocation/indexed.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>In this scheme, a special block known as the Index block contains the pointers to all the blocks occupied by a file.
+  Each file has its own index block. The ith entry in the index block contains the disk address of the ith file block.
+  The directory entry contains the address of the index block as shown in the below example.</p>
+<p>
+  <img src="/static/images/indexed.png" />
+<ul>
+  <li>Advantages</li>
+  <ul>
+    <li>This supports direct access to the blocks occupied by the file and therefore provides fast access to the file blocks.</li>
+    <li>It overcomes the problem of external fragmentation.</li>
+  </ul>
+  <li>Disadvantages</li>
+  <ul>
+    <li>The pointer overhead for indexed allocation is greater than linked allocation.</li>
+  </ul>
+</ul>
+{% endblock %}

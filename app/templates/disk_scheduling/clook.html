@@ -1,0 +1,16 @@
+{% extends 'disk_scheduling/ds_base.html' %}
+
+{% block algo_link %}
+<script type="module" src="/static/js/disk_scheduling/clook.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>C-LOOK is an enhanced version of both SCAN as well as LOOK disk scheduling algorithms. This algorithm also uses the
+  idea of wrapping the tracks as a circular cylinder as C-SCAN algorithm but the seek time is better than C-SCAN
+  algorithm. We know that C-SCAN is used to avoid starvation and services all the requests more uniformly, the same goes
+  for C-LOOK.</p>
+<p>In this algorithm, the head services requests only in one direction(either left or right) until all the requests in
+  this direction are not serviced and then jumps back to the farthest request on the other direction and service the
+  remaining requests which gives a better uniform servicing as well as avoids wasting seek time for going till the end
+  of the disk.</p>
+{% endblock %}

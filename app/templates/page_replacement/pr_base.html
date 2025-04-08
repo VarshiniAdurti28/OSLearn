@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block link %}
+{% block algo_link %}
+{% endblock %}
+{% endblock %}
+
+{% block title %}
+Page Replacement - {{algo}}
+{% endblock %}
+
+{% block body %}
+<h1>Page Replacement - {{ algo }}</h1>
+<section>
+  <h2>Wiki</h2>
+  {% block wiki %}
+  {% endblock %}
+</section>
+<section>
+  <h2>Simulation</h2>
+  <form>
+    <div>
+      <div class="form-group row" style="margin-left:40px;width:25vw;display:block">
+        <input type="number" id="frames" class="form-control" placeholder="Number of frames">
+      </div>
+
+      <div class="form-group row" style="margin-left:40px;width:25vw;display:block">
+        <input type="text" id="rs" class="form-control" placeholder="Reference string">
+      </div>
+      <input type="button" style="margin-left:40px; margin-bottom:20px" class="btn btn-success btn-lg" id="compute-btn"
+        value="Compute">
+      <div id="table-div" class="table-responsive" style="width:80vw;margin:auto;text-align:center"></div>
+      <div id="sp1"></div>
+      <div id="sp2"></div>
+    </div>
+  </form>
+  {% block sim %}
+  {% endblock %}
+</section>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'process_scheduling/ps_base.html' %}
+
+{% block algo_link %}
+<script src="/static/js/process_scheduling/srtf.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>SJF is a non-preemptive scheduling algorithm. Here we will discuss the preemptive version of SJF known as Shortest
+  Remaining Time First (SRTF).</p>
+<p>In this scheduling algorithm, the process with the smallest amount of time remaining until completion is selected to
+  execute. Since the currently executing process is the one with the shortest amount of time remaining by definition,
+  and since that time should only reduce as execution progresses, processes will always run until they complete or a new
+  process is added that requires a smaller amount of time.</p>
+{% endblock %}

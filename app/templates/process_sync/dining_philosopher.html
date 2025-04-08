@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dining Philosopher
+{% endblock %}
+
+{% block link %}
+<script src="/static/js/process_sync/dining_philosopher.js"></script>
+{% endblock %}
+
+{% block body %}
+<h1>Process Synchronization - Dining Philosopher</h1>
+<section>
+	<h2>Simulation</h2>
+	<div style="margin-top: 100px;">
+		<button type="button" class="btn btn-primary"
+			style="height:70px;width:300px;position:absolute;top:30%;left:20%;font-size:25px" id="next">Next!</button>
+		<button type="button" , id="num" , name="num" , class="btn btn-secondary" ,
+			style="height:70px;width:300px;position:absolute;top:30%;left:65%;font-size:25px">Philosopher: </button>
+		<div style="position:absolute;top:50%;left:70%;">
+			<table class="table table-striped">
+				<tr>
+					<th>Philosopher </th>
+					<th>Thinking</th>
+					<th>Hungry</th>
+					<th>Eating </th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td id="t11">Yes</td>
+					<td id="t12">-</td>
+					<td id="t13">-</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td id="t21">Yes</td>
+					<td id="t22">-</td>
+					<td id="t23">-</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td id="t31">Yes</td>
+					<td id="t32">-</td>
+					<td id="t33">-</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td id="t41">Yes</td>
+					<td id="t42">-</td>
+					<td id="t43">-</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td id="t51">Yes</td>
+					<td id="t52">-</td>
+					<td id="t53">-</td>
+				</tr>
+			</table>
+		</div>
+		<p style="position:absolute;top:37%;left:41%;">Philosopher 1</p>
+		<p style="position:absolute;top:62%;left:29%;">Philosopher 5</p>
+		<p style="position:absolute;top:48%;left:56.5%;">Philosopher 2</p>
+		<p style="position:absolute;top:106%;left:38%;">Philosopher 4</p>
+		<p style="position:absolute;top:96%;left:56%;">Philosopher 3</p>
+		<button type="button" , id="one" , name="one" ,
+			style="height:125px;width:125px;position: absolute;;top:39%;left:40%;border-radius:25px;border:2px solid #000;  background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		</button>
+		<button type="button" , id="five" , name="one" ,
+			style="height:125px;width:125px;position:absolute;top:65%;left:29%;border-radius:25px;border:1px solid #000; background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		</button>
+		<button type="button" , id="two" , name="one" ,
+			style="height:125px;width:125px;position:absolute;top:50%;left:55.5%;border-radius:25px;border:1px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		</button>
+		<button type="button" , id="four" , name="one" ,
+			style="height:125px;width:125px;position:absolute;top:92%;left:37%;border-radius:25px;border:1px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		</button>
+		<button type="button" , id="three" , name="one" ,
+			style="height:125px;width:125px;position:absolute;top:83%;left:55%;border-radius:25px;border:1px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		</button>
+		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
+			style="position: absolute;height: 60px;width: 60px; top: 51%;left:42%;visibility: hidden;" id="bowl1">
+		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
+			style="position: absolute;height: 60px;width: 60px; top: 66%;left:36.6%;visibility: hidden;" id="bowl5">
+		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
+			style="position: absolute;height: 60px;width: 60px; top: 58%;left:51%;visibility: hidden;" id="bowl2">
+		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
+			style="position: absolute;height: 60px;width: 60px; top: 82%;left:41%;visibility: hidden;" id="bowl4">
+		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
+			style="position: absolute;height: 60px;width: 60px; top: 77%;left:51%;visibility: hidden;" id="bowl3">
+		<button type="button" , id="first" , name="one" ,
+			style="height:50px;width:50px;position:absolute;top:59%;left:38%;border-radius:50px;border:2px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons8/windows-8/32/Food-Fork-icon.png') ; background-repeat: no-repeat;">
+		</button>
+		<button type="button" , id="second" , name="one" ,
+			style="height:50px;width:50px;position:absolute;top:54%;left:49%;border-radius:50px;border:2px solid #333;background-image: url('https://icons.iconarchive.com/icons/icons8/windows-8/32/Food-Fork-icon.png') ; background-repeat: no-repeat;">
+		</button>
+		<button type="button" , id="third" , name="one" ,
+			style="height:50px;width:50px;position:absolute;top:70%;left:55%;border-radius:50px;border:2px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons8/windows-8/32/Food-Fork-icon.png') ; background-repeat: no-repeat;"></button>
+		<button type="button" , id="fifth" , name="one" ,
+			style="height:50px;width:50px;position:absolute;top:79%;left:38%;border-radius:50px;border:2px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons8/windows-8/32/Food-Fork-icon.png') ; background-repeat: no-repeat;">
+		</button>
+		<button type="button" , id="fourth" , name="one" ,
+			style="height:50px;width:50px;position:absolute;top:88%;left:48%;border-radius:50px;border:2px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons8/windows-8/32/Food-Fork-icon.png') ; background-repeat: no-repeat;">
+		</button>
+		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
+			style="position: absolute;height: 100px;width: 100px; top: 66%;left:44.5%">
+</section>
+{% endblock %}

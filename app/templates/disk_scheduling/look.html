@@ -1,0 +1,13 @@
+{% extends 'disk_scheduling/ds_base.html' %}
+
+{% block algo_link %}
+<script type="module" src="/static/js/disk_scheduling/look.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>LOOK is the advanced version of SCAN (elevator) disk scheduling algorithm which gives slightly better seek time than
+  any other algorithm in the hierarchy (FCFS->SRTF->SCAN->C-SCAN->LOOK). The LOOK algorithm services request similarly
+  as SCAN algorithm meanwhile it also “looks” ahead as if there are more tracks that are needed to be serviced in the
+  same direction. If there are no pending requests in the moving direction the head reverses the direction and start
+  servicing requests in the opposite direction.</p>
+{% endblock %}

@@ -1,0 +1,112 @@
+/* Style for the navbar */
+/* Style for the navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(to right, #007bff, #6c757d);
+  box-shadow: 0 4px 6px rgba(84, 183, 201, 0.88);
+  padding: 1px 0; /* Adjusted padding to reduce height */
+}
+
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s, border-bottom 0.3s, font-weight 0.3s;
+  text-decoration: none;
+  position: relative;
+  margin-right: 20px; /* Add space between navbar links */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s;
+  transform: scaleX(0);
+}
+
+.navbar-nav .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+  background-color: #82b3e7;
+  border: none;
+  box-shadow: 0 4px 6px rgba(228, 227, 227, 0.1);
+  display: none; /* Hide dropdown menu by default */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  animation: slideDown 0.3s ease forwards; /* Slide-down animation */
+}
+
+/* Show dropdown menu on hover */
+.navbar-nav .nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown item styles */
+.dropdown-item {
+  color: #fff;
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for dropdown items */
+.dropdown-item:hover {
+  background-color: #36a7d7;
+}
+
+/* Slide-down animation keyframes */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add hover effect for navbar */
+.navbar:hover {
+  background: linear-gradient(to right, #00aaff, #007bff);
+}
+
+/* Add hover effect for navbar links */
+.navbar-nav .nav-link:hover {
+  color: #00aaff;
+}
+
+/* Add hover effect for dropdown items */
+.dropdown-item:hover {
+  background-color: #0077cc;
+}
+

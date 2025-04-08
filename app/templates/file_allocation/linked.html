@@ -1,0 +1,33 @@
+{% extends 'file_allocation/fa_base.html' %}
+
+{% block link %}
+<script src="/static/js/file_allocation/linked.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>In this scheme, each file is a linked list of disk blocks which need not be contiguous. The disk blocks can be
+  scattered anywhere on the disk.
+  The directory entry contains a pointer to the starting and the ending file block.
+  Given below is the example of linked list allocation method where each block contains a pointer to the next block
+  occupied by the file.</p>
+<p>
+  <img src="/static/images/linked.png" />
+<ul>
+  <li>Advantages</li>
+  <ul>
+    <li>This is very flexible in terms of file size. File size can be increased easily since the system does not have to
+      look for a contiguous chunk of memory.</li>
+    <li>This method does not suffer from external fragmentation. This makes it relatively better in terms of memory
+      utilization.</li>
+  </ul>
+  <li>Disadvantages</li>
+  <ul>
+    <li>Because the file blocks are distributed randomly on the disk, many seeks are needed to access every block
+      individually. This makes linked allocation slower.</li>
+    <li>It does not support random or direct access. We can not directly access the blocks of a file. A block k of a
+      file can be accessed by traversing k blocks sequentially (sequential access ) from the starting block of the file
+      via block pointers.</li>
+    <li>Pointers required in the linked allocation incur some extra overhead.</li>
+  </ul>
+</ul>
+{% endblock %}

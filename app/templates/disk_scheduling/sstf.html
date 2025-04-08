@@ -1,0 +1,9 @@
+{% extends 'disk_scheduling/ds_base.html' %}
+
+{% block algo_link %}
+  <script type="module" src="/static/js/disk_scheduling/sstf.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>Basic idea is the tracks which are closer to current disk head position should be serviced first in order to minimise the seek operations.</p>
+{% endblock %}

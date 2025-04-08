@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Process Synchronization
+{% endblock %}
+
+{% block body %}
+<h1>Process Synchronization</h1>
+<p>On the basis of synchronization, processes are categorized as one of the following two types:</p>
+<ol>
+    <li><b>Independent Process</b>: Execution of one process does not affects the execution of other processes.</li>
+    <li><b>Cooperative Process</b>: Execution of one process affects the execution of other processes.</li>
+</ol>
+<p>Process synchronization problem arises in the case of Cooperative process also because resources are shared in
+    Cooperative processes.</p>
+<h2>Critical Sections</h2>
+<img src="/static/images/critical_section.png" />
+<p>Critical section is a code segment that can be accessed by only one process at a time. Critical section contains
+    shared variables which need to be synchronized to maintain consistency of data variables. In the entry section, the
+    process requests for entry in the Critical Section. Any solution to the critical section
+    problem must satisfy three requirements:
+<p>
+<ol>
+    <li><b>Mutual Exclusion</b>: If a process is executing in its critical section, then no other process is allowed to
+        execute in the critical section.</li>
+    <li><b>Progress</b>: If no process is executing in the critical section and other processes are waiting outside the
+        critical section, then only those processes that are not executing in their remainder section can participate in
+        deciding which will enter in the critical section next, and the selection can not be postponed indefinitely.
+    </li>
+    <li>A bound must exist on the number of times that other processes are allowed to enter their critical sections
+        after a process has made a request to enter its critical section and before that request is granted.</li>
+</ol>
+<section>
+    <h2>Problems</h2>
+    <section>
+        <h3>Dining Philosopher</h3>
+        <p>N philosophers are sitting around a table with N forks between them. Each philosopher must pick up both forks
+            on her left and right before she can start eating. If each philosopher first picks the fork on her left (or
+            right), then all will deadlock while waiting for the other fork. The goal is to come up with an algorithm
+            that lets all philosophers eat, without deadlock or starvation.</p>
+        <img src="/static/images/dining_philosopher.png" />
+    </section>
+    <section>
+        <h3>Producer Consumer</h3>
+        <p>In this problem, one or more processes produce items into a buffer. Another set of processes consume items
+            from the buffer. The buffer can be bounded or unbounded, but let’s discuss the bounded case here. Several
+            real life scenarios map to this problem. For example, a disk driver produces disk blocks, and the kernel
+            consumes them and hands them over to waiting processes.</p>
+        <p>Producers and consumers may also need to wait for each other: a consumer must wait for the producer to put
+            something in an empty buffer, and a producer must wait for the consumer to take something out of a full
+            buffer.</p>
+        <p>To solve this problem, we need two counting semaphores – Full and Empty. “Full” keeps track of number of
+            items in the buffer at any given time and “Empty” keeps track of number of unoccupied slots.
+        </p>
+    </section>
+    <section>
+        <h3>Sleeping Barber</h3>
+        <p>The analogy is based upon a hypothetical barber shop with one barber. There is a barber shop which has one
+            barber, one barber chair, and n chairs for waiting for customers if there are any to sit on the chair.</p>
+        <ul>
+            <li>If there is no customer, then the barber sleeps in his own chair.</li>
+            <li>When a customer arrives, he has to wake up the barber.</li>
+            <li>If there are many customers and the barber is cutting a customer’s hair, then the remaining customers
+                either wait if there are empty chairs in the waiting room or they leave if no chairs are empty.</li>
+        </ul>
+        <p>The solution to this problem includes three semaphores
+            First is for the customer which counts the number of customers present in the waiting room (customer in the
+            barber chair is not included because he is not waiting).
+            Second, the barber 0 or 1 is used to tell whether the barber is idle or is working, And the third mutex is
+            used to provide the mutual exclusion which is required for the process to execute.
+            In the solution, the customer has the record of the number of customers waiting in the waiting room if the
+            number of customers is equal to the number of chairs in the waiting room then the upcoming customer leaves
+            the barbershop.</p>
+        <img src="/static/images/sleeping_barber.png" />
+    </section>
+    <section>
+        <h3>Reader Writer</h3>
+        <p>Several processes wish to read and write data shared between them.
+            Some processes only want to read, while others want to update the shared data.
+            Multiple readers may concurrently access the data.
+            However, a writer must not access the data concurrently with anyone else, either a reader or a writer.
+            Reader-writer locks exist precisely to address such problems.
+        </p>
+    </section>
+</section>
+
+{% endblock %}

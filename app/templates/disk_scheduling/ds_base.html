@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block link %}
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script>zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/"; ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"]; </script>
+{% block algo_link %}
+{% endblock %}
+{% endblock %}
+
+{% block title %}
+Disk Scheduling - {{algo}}
+{% endblock %}
+
+{% block body %}
+<h1>Disk Scheduling - {{ algo }}</h1>
+<section id="ds-wiki">
+  <h2>Wiki</h2>
+  {% block wiki %}
+  {% endblock %}
+</section>
+<section>
+  <h2>Simulation</h2>
+  <div style="margin-left: 3rem;">
+    <p class="form-text">Enter the following details</p>
+    <label class="form-label">Head</label>
+    <input class="tdm-head form-control" type="number" min="0" />
+    <p class="form-text">Enter the first and last cylinder number</p>
+    <label class="form-label">First</label>
+    <input class="tdm-head form-control" type="number" min="0" />
+    <label class="form-label">Last</label>
+    <input class="tdm-head form-control" type="number" min="0" />
+    <label class="form-label">Reference String</label>
+    <input class="tdm-head form-control" type="text" id="reference-string" />
+    <button class="tdm-button btn btn-success" id="calc">Calculate</button>
+  </div>
+  <br /><br />
+  <div class="output-container">
+    <div id="chartContainer"></div>
+  </div>
+  {% block sim %}
+  {% endblock %}
+</section>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'process_scheduling/ps_base.html' %}
+
+{% block style %}
+#priority {
+  display: inline-block;
+}
+#ep th:nth-child(4),
+#ep td:nth-child(4) {
+  display: table-cell;
+}
+#gantt-div,
+#ps-wiki {
+display: none;
+}
+{% endblock %}
+
+{% block algo_link %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src="/static/js/process_scheduling/compare.js"></script>
+{% endblock %}

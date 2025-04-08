@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Reader Writer
+{% endblock %}
+
+{% block link %}
+  <script src="/static/js/process_sync/reader_writer.js"></script>
+{% endblock %}
+
+{% block body %}
+  <h1>Process Synchronization - Reader Writer</h1>
+  <section>
+    <h2>Simulation</h2>
+    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; row-gap: 2rem;">
+      <div style="display: flex; flex-direction: row; column-gap: 4rem;">
+        <button type="button" id="reader" name="read" class="btn btn-success">Read</button>
+        <button type="button" id="writer" name="write" class="btn btn-warning">Write</button>
+        <button type="button" id="stop" name="write" class="btn btn-danger">Stop writing</button>
+      </div>
+      <div>
+        <form>
+          <textarea id="textarea" style="height:500px;width:700px;border:solid 1px black;font-size:20px" disabled="false" class="form-control"></textarea>
+        </form>
+      </div>
+      <div style="display: flex; flex-direction: row; column-gap: 10px;" id="readers">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader1">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader2">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader3">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader4">
+      </div>
+    </div>
+  </section>
+{% endblock %}

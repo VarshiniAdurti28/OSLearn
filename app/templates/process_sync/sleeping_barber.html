@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Sleeping Barber
+{% endblock %}
+
+{% block link %}
+  <script src="/static/js/process_sync/sleeping_barber.js"></script>
+{% endblock %}
+
+{% block body %}
+<h1>Process Synchronization - Sleeping Barber</h1>
+<section>
+  <h2>Simulation</h2>
+  <figure style="display: flex; flex-direction: column; row-gap: 10px;">
+    <div style="display: flex; flex-direction: row; justify-content: space-around;">
+      <button class="btn btn-primary" id="prod" type="button" style="font-size: 25px; width: 100px;">Enter</button>
+      <button class="btn btn-primary" id="con" type="button" style="font-size: 25px; width: 100px;" disabled>Exit</button>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-around;">
+      <button class="btn btn-warning" id="count" type="button" style="color:black; width: 200px;">Waiting = 0</button>
+      <button class="btn btn-warning" id="buffer-size" type="button" style="color:black; width: 200px;">Waiting Seats = 5</button>
+    </div>
+    <div>
+      <button type="button" id="room" name="room" style="height:50%;width:58%;position:absolute;top:45%;border:solid 4px black;left:19%;">
+      </button>
+      <button type="button" id="mirror" name="mirror" style="height:30%;width:1%;position:absolute;top:45%;left:19%;border:solid 2px black;background-color:#00BFFF">
+      </button>
+      <img src="https://icons.iconarchive.com/icons/icons8/windows-8/512/Hair-Barbers-Chair-icon.png"
+        style="position: absolute;height: 100px;width: 100px; top: 60%;left:23%; " id="chair">
+      <img src="https://icons.iconarchive.com/icons/designbolts/free-male-avatars/128/Male-Avatar-Emo-Haircut-icon.png"
+        style="position: absolute;height: 80px;width: 80px; top: 57%;left:24%; visibility: hidden;" id="cust">
+      <img src="https://icons.iconarchive.com/icons/bevel-and-emboss/character/256/chef-icon.png"
+        style="position: absolute;height: 100px;width: 100px; top: 60%;left:27%; visibility: hidden;" id="barber">
+      <img src="https://icons.iconarchive.com/icons/designbolts/free-male-avatars/128/Male-Avatar-Emo-Haircut-icon.png"
+        style="position: absolute;height: 100px;width: 100px; top: 97%;left:35%; visibility: hidden;" id="one">
+      <img src="https://icons.iconarchive.com/icons/designbolts/free-male-avatars/128/Male-Avatar-Emo-Haircut-icon.png"
+        style="position:absolute;height: 100px;width: 100px; top: 97%;left:40%;visibility: hidden;  " id="two">
+      <img src="https://icons.iconarchive.com/icons/designbolts/free-male-avatars/128/Male-Avatar-Emo-Haircut-icon.png"
+        style="position:absolute;height: 100px;width: 100px; top: 97%;left:45%; visibility: hidden;" id="three">
+      <img src="https://icons.iconarchive.com/icons/designbolts/free-male-avatars/128/Male-Avatar-Emo-Haircut-icon.png"
+        style="position:absolute;height: 100px;width: 100px; top: 97%;left:50%;visibility: hidden; " id="four">
+      <img src="https://icons.iconarchive.com/icons/designbolts/free-male-avatars/128/Male-Avatar-Emo-Haircut-icon.png"
+        style="position: absolute;height:  100px;width: 100px; top: 97%;left:55%; visibility: hidden;" id="five">
+      <button type="button" , id="door" , name="door" ,
+        style="height:3%;width:10%;position:absolute;top:92%;left:25%;background-color:brown"> </button>
+      <button type="button" , id="curtain" , name="curtain" ,
+        style="height:44%;width:0.5%;position:absolute;top:45%;left:55%;background-color:#E0E0E0"> </button>
+      <img src="https://icons.iconarchive.com/icons/hybridworks/yoritsuki/128/Futon-bed-icon.png"
+        style="position: absolute;height: 300px;width: 200px; top: 60%;left:64%; " id="bed">
+      <img src="https://icons.iconarchive.com/icons/bevel-and-emboss/character/256/chef-icon.png" style="position: absolute;height: 100px;width: 100px; top: 70%;left:66.5%; " id="Sleep">
+    </div>
+  </figure>
+</section>
+{% endblock %}

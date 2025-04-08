@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Process Scheduling - {{ algo }}
+{% endblock %}
+
+{% block link %}
+  <script src="/static/js/process_scheduling/ps_base.js"></script>
+  {% block algo_link %}
+  {% endblock %}
+{% endblock %}
+
+{% block style %}
+#priority,
+#ep th:nth-child(4),
+#ep td:nth-child(4) {
+  display: none;
+}
+{% endblock %}
+
+{% block body %}
+  <h1>Process Scheduling - {{ algo }}</h1>
+  <section id="ps-wiki">
+    <h2>Wiki</h2>
+    {% block wiki %}
+    {% endblock %}
+  </section>
+  <section>
+    <h2>Simulation</h2>
+    <div class="container">
+      <div class="container row">
+        <div class="col-12 col-md-6" id="inp">
+          <h3>Processes</h3>
+          <table id="ep" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>P. No.</th>
+                <th>AT</th>
+                <th>BT</th>
+                <th>Priority</th>  
+              </tr>
+            </thead>
+            <tbody id="ept">
+            </tbody>
+          </table>
+          <input type="number" class="form-control" min="0" id='at1' placeholder="Arrival time"></input>
+          <input type="number" class="form-control" min="0" id='bt1' placeholder="Burst time"></input>
+          <input type="hidden" min="0" id="io" value="0" placeholder="IO time"></input>
+          <input type="hidden" min="0" id="bt2" value="0" placeholder="Burst time 2"></input>
+          <input type="number" class="form-control" min="0" id="priority" placeholder="Priority"></input>
+          <button id="add" class="btn btn-primary">Add</button>
+          <br />
+          <input type="number" class="form-control" min="0" id="tq" placeholder="Time quantum">
+          </input>
+          <button id="start" class="btn btn-success">Start</button>
+        </div>
+        <div class="col-12 col-md-6" id="gantt-div">
+          <h2>Gantt Chart</h2>
+          <div id="gantt-chart"></div>
+        </div>
+      </div>
+      <div class="container row">
+        <div class="col-12 col-md-6">
+          <div class="panel-content">
+            <table id="ptab" class="table table-bordered">
+              <thead>
+              <tr id="thead">
+                <th>P. No.</th>
+                <th>Arrival</th>
+                <th>Burst</th>
+                <th>Wait</th>
+                <th>TaT</th>
+              </tr>
+              <tbody id="ptable">
+              </tbody>
+              </thead>
+            </table>
+          </div>
+        </div>
+        <div class="col-12 col-md-6" style="text-align: center;">
+          <p id="average" align="center"></p>
+        </div>
+      </div>
+    </div>
+    <canvas id="bar-chart" width="800" height="450"></canvas>
+    {% block sim %}
+    {% endblock %}
+  </section>
+{% endblock %}

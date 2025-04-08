@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block link %}
+    {% block algo_link %}
+    {% endblock %}
+{% endblock %}
+
+{% block title %}
+    MVT - {{algo}}
+{% endblock %}
+
+{% block style %}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+{% endblock %}
+
+{% block body %}
+<h1>MVT - {{ algo }}</h1>
+<section>
+    <h2>Simulation</h2>
+    <div class="row">
+            <div class="col-md-3  m-5">
+                <div class="m-2">
+                    <div class="form-group">
+                        <label>Size of memory: </label>
+                        <input type="text" class="form-control" id="mem-size" placeholder="Enter size of memory: ">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="mem-size-btn">Go</button> 
+                </div>                
+            </div>
+            <div class="col-md-3 m-5">   
+                <div id="add-rem-pro-btns">
+                </div>
+                <div class="m-2" id="add-rem-pro">
+                </div>   
+                <div id="canvas" class="ml-5 mt-5">
+                </div>     
+            </div>    
+            <div class="col-md-3 m-5">
+                <div id="compaction">
+                </div>
+                <div id="input-q-table">
+                </div>        
+            </div>  
+    
+    {% block sim %}
+    {% endblock %}
+</section>
+{% endblock %}
+

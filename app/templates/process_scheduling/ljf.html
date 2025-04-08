@@ -1,0 +1,13 @@
+{% extends 'process_scheduling/ps_base.html' %}
+
+{% block algo_link %}
+<script src="/static/js/process_scheduling/ljf.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>Longest Job First (LJF) is a non-preemptive scheduling algorithm. This algorithm is based upon the burst time of the
+  processes. The processes are put into the ready queue based on their burst times i.e., in descending order of the
+  burst times. As the name suggests this algorithm is based upon the fact that the process with the largest burst time
+  is processed first. The burst time of only those processes is considered that have arrived in the system until that
+  time. Its preemptive version is called Longest Remaining Time First (LRTF) algorithm. </p>
+{% endblock %}

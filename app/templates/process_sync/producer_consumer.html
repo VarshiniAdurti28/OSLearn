@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Producer Consumer
+{% endblock %}
+
+{% block link %}
+  <script src="/static/js/process_sync/producer_consumer.js"></script>
+{% endblock %}
+
+{% block body %}
+  <h1>Process Synchronization - Producer Consumer</h1>
+  <section>
+    <h2>Simulation</h2>
+    <div style="padding:23%; margin-bottom:10vh;">
+      <button class="btn btn-success" id="prod" type="button" style="height:10%;width:15%;position:absolute;top:38%;left:20%;font-size:25px;">Proceed</button>
+      <button class="btn" id="prod1" type="button" style="height:10%; width:12%; position:absolute; top:80%; left:25%; font-size:25px; background:red; color:white" disabled="">Produce</button>
+      <button class="btn" id="con" type="button" style="height:10%; width:12%; position:absolute; top:80%; right:25%; font-size:25px; background:red; color:white;" disabled="">Consume</button>
+      <button class="btn btn-primary" type="button" id="num" name="num" class="btn btn-primary" style="height:70px;width:300px;position:absolute;top:68%;left:28%;font-size:17px">Buffer
+        size: 5</button>
+      <button type="button" id="one" name="one" style="height:100px;width:165px;position:absolute;border:solid 4px black;top:65%;left:45%;background-color:white">
+      </button>
+      <button type="button" , id="two" , name="two" ,
+        style="height:100px;width:165px;border:solid 4px black;position:absolute;top:75%;left:45%;background-color:white">
+      </button>
+      <button type="button" , id="three" , name="three" ,
+        style="height:100px;width:165px;border:solid 4px black;position:absolute;top:85%;left:45%;background-color:white">
+      </button>
+      <button type="button" , id="four" , name="four" ,
+        style="height:100px;width:165px;border:solid 4px black;position:absolute;top:95%;left:45%;background-color:white">
+      </button>
+      <button type="button" , id="five" , name="five" ,
+        style="height:100px;width:165px;border:solid 4px black;position:absolute;top:105%;left:45%;background-color:white">
+      </button>
+    </div>
+    <button class="btn btn-warning" id="count" type="button" style="height:50px;width:165px;position:absolute;top:55%;left:45%;">Counter = 0</button>
+  </section>
+{% endblock %}

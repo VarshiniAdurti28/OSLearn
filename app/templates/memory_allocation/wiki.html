@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Memory Allocation
+{% endblock %}
+
+{% block body %}
+<h1>Memory Allocation</h1>
+<h2>MFT</h2>
+<p>MFT (Multiprogramming with a Fixed number of Tasks) is one of the old memory management techniques in which the
+    memory is partitioned into fixed size partitions and each job is assigned to a partition. The memory assigned to a
+    partition does not change.</p>
+<img src="/static/images/mft.png" />
+<ul>
+    <li>Advanatages</li>
+    <ul>
+        <li>Algorithms needed to implement Fixed Partitioning are easy to implement. It simply requires putting a
+            process into a certain partition without focusing on the emergence of Internal and External Fragmentation.
+        </li>
+    </ul>
+    <li>Disadvantages</li>
+    <ul>
+        <li><b>Internal Fragmentation</b>: Main memory use is inefficient. Any program, no matter how small, occupies an
+            entire partition. This can cause internal fragmentation. </li>
+        <li><b>External Fragmentation</b>: The total unused space (as stated above) of various partitions cannot be used
+            to load the processes even though there is space available but not in the contiguous form (as spanning is
+            not allowed).</li>
+    </ul>
+</ul>
+<div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 25px;">
+    <a href="/memory-allocation/mft/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
+    <a href="/memory-allocation/mft/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>
+    <a href="/memory-allocation/mft/worst-fit"><button class="btn btn-success btn-lg">Worst Fit</button></a>
+</div>
+<h2>MVT</h2>
+<p>MVT (Multiprogramming with a Variable number of Tasks) is the memory management technique in which each job gets just
+    the amount of memory it needs. That is, the partitioning of memory is dynamic and changes as jobs enter and leave
+    the system. MVT is a more ``efficient'' user of resources. MFT suffers with the problem of internal fragmentation
+    and MVT suffers with external fragmentation.</p>
+<div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 25px; margin-bottom: 50px;">
+    <a href="/memory-allocation/mvt/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
+    <a href="/memory-allocation/mvt/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>
+    <a href="/memory-allocation/mvt/worst-fit"><button class="btn btn-success btn-lg">Worst Fit</button></a>
+</div>
+{% endblock %}

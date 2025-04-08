@@ -1,0 +1,12 @@
+{% extends 'disk_scheduling/ds_base.html' %}
+
+{% block algo_link %}
+<script type="module" src="/static/js/disk_scheduling/scan.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>In SCAN algorithm the disk arm moves into a particular direction and services the requests coming in its path and
+  after reaching the end of disk, it reverses its direction and again services the request arriving in its path. So,
+  this algorithm works as an elevator and hence also known as elevator algorithm. As a result, the requests at the
+  midrange are serviced more and those arriving behind the disk arm will have to wait.</p>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Process Scheduling
+{% endblock %}
+
+{% block body %}
+<h1>Process Scheduling</h1>
+<p>The process scheduling is the activity of the process manager that handles the removal of the running process from
+    the CPU and the selection of another process on the basis of a particular strategy.</p>
+
+<p>Process scheduling is an essential part of a Multiprogramming operating systems. Such operating systems allow more
+    than one process to be loaded into the executable memory at a time and the loaded process shares the CPU using time
+    multiplexing.</p>
+
+<p>There are three types of process scheduler.</p>
+
+<dl>
+    <dt>Long Term or Job Scheduler</dt>
+    <dd>It brings the new process to the ‘Ready State’. It controls Degree of Multi-programming, i.e., number of process
+        present in ready state at any point of time. It is important that the long-term scheduler make a careful
+        selection of both IO and CPU bound process. IO bound tasks are which use much of their time in input and output
+        operations while CPU bound processes are which spend their time on CPU. The job scheduler increases efficiency
+        by maintaining a balance between the two.
+    </dd>
+    <dt>Short Term or CPU Scheduler</dt>
+    <dd>It is responsible for selecting one process from ready state for scheduling it on the running state. Note: Short-term
+        scheduler only selects the process to schedule it doesn’t load the process on running. Here is when all the scheduling
+        algorithms are used. The CPU scheduler is responsible for ensuring there is no starvation owing to high burst time
+        processes.</dd>
+    <dt>Medium Term Scheduler</dt>
+    <dd>It is responsible for suspending and resuming the process. It mainly does swapping (moving processes from main memory to
+        disk and vice versa). Swapping may be necessary to improve the process mix or because a change in memory requirements
+        has overcommitted available memory, requiring memory to be freed up. It is helpful in maintaining a perfect balance
+        between the I/O bound and the CPU bound. It reduces the degree of multiprogramming.</dd>
+</dl>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Disk Scheduling
+{% endblock %}
+
+{% block body %}
+<h1>Disk Scheduling</h1>
+<p>Disk scheduling is done by operating systems to schedule I/O requests arriving for the disk. Disk scheduling is also
+    known as I/O scheduling. Disk scheduling is important because:
+</p>
+<ul>
+    <li>Multiple I/O requests may arrive by different processes and only one I/O request can be served at a time by the
+        disk
+        controller. Thus other I/O requests need to wait in the waiting queue and need to be scheduled.</li>
+    <li>Two or more request may be far from each other so can result in greater disk arm movement.</li>
+    <li>Hard drives are one of the slowest parts of the computer system and thus need to be accessed in an efficient
+        manner.</li>
+</ul>
+<p>There are many Disk Scheduling Algorithms but before discussing them let’s have a quick look at some of the important
+    terms:</p>
+<ul>
+    <li><b>Seek Time</b>: Seek time is the time taken to locate the disk arm to a specified track where the data is to be read or write.
+        So the disk scheduling algorithm that gives minimum average seek time is better.</li>
+    <li><b>Rotational Latency</b>: Rotational Latency is the time taken by the desired sector of disk to rotate into a position so that
+        it can access the read/write heads. So the disk scheduling algorithm that gives minimum rotational latency is better.</li>
+    <li><b>Transfer Time</b>: Transfer time is the time to transfer the data. It depends on the rotating speed of the disk and number
+        of bytes to be transferred.</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'page_replacement/pr_base.html' %}
+
+{% block algo_link %}
+<script type="module" src="/static/js/page_replacement/fifo.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>This is the simplest page replacement algorithm. In this algorithm, the operating system keeps track of all pages in
+  the memory in a queue, the oldest page is in the front of the queue. When a page needs to be replaced page in the front of
+  the queue is selected for removal.</p>
+{% endblock %}

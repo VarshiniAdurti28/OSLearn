@@ -1,0 +1,12 @@
+{% extends 'process_scheduling/ps_base.html' %}
+
+{% block algo_link %}
+<script src="/static/js/process_scheduling/sjf.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>The Shortest-Job-First (SJF) or shortest job next, is a scheduling policy that selects the waiting process with the
+  smallest execution time to execute next. It is a non-preemptive algorithm. Being a non-preemptive algorithm, the first
+  process assigned to the CPU is executed till completion, then the process whose burst time is minimum is assigned next
+  to the CPU and hence it continues.</p>
+{% endblock %}

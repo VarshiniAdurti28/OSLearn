@@ -1,0 +1,12 @@
+{% extends 'process_scheduling/ps_base.html' %}
+
+{% block algo_link %}
+<script src="/static/js/process_scheduling/fcfs.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>FCFS (First Come First Serve) follows the principle of FIFO (First-in-First-out). It is the simplest scheduling
+  algorithm. FCFS simply queues processes in the order that they arrive in the ready queue. In this, the process which
+  comes first will be executed first and the next process starts only after the previous gets fully executed. It is a
+  non-preemptive algorithm.</p>
+{% endblock %}

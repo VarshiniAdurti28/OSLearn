@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  MFT - {{ algo }}
+{% endblock %}
+
+{% block style %}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+{% endblock %}
+
+{% block body %}
+  <h1>MFT - {{ algo }}</h1>
+  <section>
+    <h2>Simulation</h2>
+    <div class="row">
+        <div class="col-md-3  m-5">
+            <div class="m-2">
+                <div class="form-group">
+                    <label class="form-label">Number of partitions</label>
+                    <input type="text" class="form-control" id="num-parts" placeholder="Number of partitions">
+                </div>
+                <button type="submit" class="btn btn-primary" id="num-parts-btn">Next</button>
+            </div>
+            <div id="parts-size-form" class="m-2">
+            </div>
+        </div>
+        <div class="col-md-3 m-5">
+            <div id="add-rem-pro-btns">
+            </div>
+            <div class="m-2" id="add-rem-pro">
+            </div>
+            <div id="canvas" class="ml-5 mt-5">
+            </div>
+        </div>
+        <div class="col-md-3 m-5">
+            <div id="input-q-table">
+            </div>
+        </div>
+    </div>
+    {% block algo_link %}
+    {% endblock %}
+    {% block sim %}
+    {% endblock %}
+  </section>
+{% endblock %}

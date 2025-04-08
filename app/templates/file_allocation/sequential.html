@@ -1,0 +1,37 @@
+{% extends 'file_allocation/fa_base.html' %}
+
+{% block link %}
+<script src="/static/js/file_allocation/sequential.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<p>In this scheme, each file occupies a contiguous set of blocks on the disk. For example, if a file requires n blocks
+  and is given a block b as the starting location, then the blocks assigned to the file will be: b, b+1, b+2,……b+n-1.
+  This means that given the starting block address and the length of the file (in terms of blocks required), we can
+  determine the blocks occupied by the file.
+  The directory entry for a file with contiguous allocation contains
+<p>
+<ul>
+  <li>Address of starting block</li>
+  <li>Length of the allocated portion.</li>
+</ul>
+<p>In the image shown below, there are three files in the directory. The starting block and the length of each file are
+  mentioned in the table. We can check in the table that the contiguous blocks are assigned to each file as per its
+  need.</p>
+<img src="/static/images/contiguous.png" />
+<ul>
+  <li>Advantages</li>
+  <ul>
+    <li>Both the Sequential and Direct Accesses are supported by this. For direct access, the address of the kth block of
+      the file which starts at block b can easily be obtained as (b+k).</li>
+    <li>This is extremely fast since the number of seeks are minimal because of contiguous allocation of file blocks.</li>
+  </ul>
+  <li>Disadvantages</li>
+  <ul>
+    <li>This method suffers from both internal and external fragmentation. This makes it inefficient in terms of memory
+      utilization.</li>
+    <li>Increasing file size is difficult because it depends on the availability of contiguous memory at a particular
+      instance.</li>
+  </ul>
+</ul>
+{% endblock %}

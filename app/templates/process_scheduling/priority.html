@@ -1,0 +1,27 @@
+{% extends 'process_scheduling/ps_base.html' %}
+
+{% block style %}
+#priority {
+display: inline-block;
+}
+#ep th:nth-child(4),
+#ep td:nth-child(4) {
+display: table-cell;
+}
+{% endblock %}
+
+{% block algo_link %}
+<script src="/static/js/process_scheduling/priority.js"></script>
+{% endblock %}
+
+{% block wiki %}
+<h3>Non-Preemptive</h3>
+<p>Non-Preemptive Priority Scheduling: It is a non-preemptive algorithm and one of the most common scheduling algorithms
+  in batch systems. Each process is assigned a priority. The process with the highest priority is to be executed first
+  and so on.</p>
+<p>Processes with the same priority are executed on the FCFS scheme. Priority can be decided based on memory
+  requirements, time requirements, or any other resource requirement.
+</p>
+<h3>Preemptive</h3>
+<p>This follows preemption where one process can be pre-empted and replaced by another process.</p>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block style %}
+body {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%); /* Gradient background color */
+}
+
+main,
+nav {
+    margin: 0 !important;
+}
+
+.waviy {
+    text-align: center;
+    font-size: 4em; /* Adjust size as needed */
+    margin-top: 150px; /* Adjust top margin as needed */
+    opacity: 1; /* Adjust opacity as needed (0 = fully transparent, 1 = fully opaque) */
+    font-weight: bold; /* Make the text bolder */
+    animation: pulse 2s infinite alternate; /* Continuous pulse animation */
+    position: relative; /* Enable positioning */
+    z-index: 1; /* Ensure text is above other elements */
+}
+
+.waviy span {
+    display: inline-block; /* Ensure each letter is on a separate line */
+}
+
+.navigation-links {
+    text-align: center;
+    margin-top: 100px;
+    position: absolute; /* Enable positioning */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the element precisely */
+    color: #ffffff;
+}
+
+.navigation-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigation-links ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navigation-links ul li a {
+    text-decoration: line;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navigation-links ul li a:hover {
+    color: #ffffff;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+{% endblock %}
+
+
+
+
+{% block body %}
+<div class="waviy">
+    <span style="--i:1">O</span>
+    <span style="--i:2">S</span>
+    <span style="--i:3"> </span>
+    <span style="--i:4"> </span>
+    <span style="--i:5">S</span>
+    <span style="--i:6">I</span>
+    <span style="--i:7">M</span>
+    <span style="--i:8">U</span>
+    <span style="--i:9">L</span>
+    <span style="--i:10">A</span>
+    <span style="--i:11">T</span>
+    <span style="--i:12">O</span>
+    <span style="--i:13">R</span>
+</div>
+
+<div class="navigation-links">
+    <ul>
+        <li><a>Process Scheduling</a></li>
+        <li><a>Process Synchronization</a></li>
+        <li><a>Disk Scheduling</a></li>
+        <li><a>Memory Management</a></li>
+        <li><a>Page Replacement Algorithms</a></li>
+        <li><a>File Allocation</a></li>
+        <li><a>Deadlock</a></li>
+    </ul>
+</div>
+{% endblock %}

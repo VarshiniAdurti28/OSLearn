@@ -2,7 +2,6 @@
 name = "repl_python3_OS-Sim"
 version = "0.1.0"
 description = ""
-authors = ["MehulTodi <<>>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

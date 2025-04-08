@@ -4,54 +4,62 @@
     Team
 {% endblock %}
 
-{% block body %}
-    <div class="team-div">
-        <h1>Team Members</h1>
-        <table class="table table-hover">
-            <tr>
-                <th>Member</th>
-                <th>Roll No.</th>
-            </tr>
-            <tr>
-                <td>Sunil Thunga</td>
-                <td>221CS252</td>
-            </tr>
-            <tr>
-                <td>Vikas kushwaha</td>
-                <td>221CS260</td>
-            </tr>
-            <tr>
-                <td>Tarun Dinesh Joshi</td>
-                <td>221CS256</td>
-            </tr>
-            <tr>
-                <td>Vaibhav Anurag</td>
-                <td>221CS258</td>
-            </tr>
-            <tr>
-                <td>Varahi Suvarna</td>
-                <td>221CS259</td>
-            </tr>
-            <tr>
-                <td>Syed Farhan</td>
-                <td>221CS254</td>
-            </tr>
-            <tr>
-                <td>Srivatsan Suresh</td>
-                <td>221CS251</td>
-            </tr>
-            <tr>
-                <td>Tallamapuram Dileep</td>
-                <td>221CS255</td>
-            </tr>
-            <tr>
-                <td>Tumula Sarath Chandra</td>
-                <td>221CS257</td>
-            </tr>
-            <tr>
-                <td>Supritha K C</td>
-                <td> 221CS253</td>
-            </tr>
-        </table>
-    </div>
+{% block style %}
+body {
+    background: url('/static/images/logo.png') no-repeat center center fixed;
+    background-size: contain;
+    background-color: #f3f4f6;
+    color: #000;
+    font-family: Arial, sans-serif;
+}
+
+.team-div {
+    background-color: rgba(144, 213, 255, 0.6); /* semi-transparent blue */
+    margin: 100px 50px;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 550px; /* narrower width */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.table-hover th,
+.table-hover td {
+    text-align: left;
+    vertical-align: middle;
+}
 {% endblock %}
+
+
+{% block body %}
+<div class="team-div">
+    <h1>Team Members</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Roll No.</th>
+                <th>Member</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>231CS201</strong></td><td><strong>Aalima Khan</strong></td></tr>
+            <tr><td><strong>231CS202</strong></td><td><strong>Abhiram Suresh</strong></td></tr>
+            <tr><td><strong>231CS203</strong></td><td><strong>Aditya Suresh</strong></td></tr>
+            <tr><td><strong>231CS204</strong></td><td><strong>Adurti V L Varshini</strong></td></tr>
+            <tr><td><strong>231CS205</strong></td><td><strong>Advaith Nair</strong></td></tr>
+            <tr><td><strong>231CS206</strong></td><td><strong>Aman Kumar Singh</strong></td></tr>
+            <tr><td><strong>231CS207</strong></td><td><strong>Amrit Lathar</strong></td></tr>
+            <tr><td><strong>231CS208</strong></td><td><strong>Ananya A K</strong></td></tr>
+            <tr><td><strong>231CS209</strong></td><td><strong>Ankush Choudhary</strong></td></tr>
+            <tr><td><strong>231CS2010</strong></td><td><strong>Karun Suhas</strong></td></tr>
+        </tbody>
+        
+    </table>
+</div>
+{% endblock %}
+

@@ -38,7 +38,7 @@ This project is developed as a part of the course CS252 - Operating Systems.
     - Dining Philosopher
     - Producer Consumer
     - Reader Writer
-    - Sleeping Barber
+    - Sleeping Barber (Extra)
 - Disk Scheduling
     - FCFC
     - SCAN

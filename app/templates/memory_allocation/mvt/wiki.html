@@ -4,15 +4,52 @@
 Memory Allocation
 {% endblock %}
 
+{% block style %}
+<style>
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.1);
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+    }
+
+    .btn-lg {
+        padding: 12px 24px;
+        font-size: 1.2em;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
-<h1>MVT</h1>
-<p>MVT (Multiprogramming with a Variable number of Tasks) is the memory management technique in which each job gets just
-    the amount of memory it needs. That is, the partitioning of memory is dynamic and changes as jobs enter and leave
-    the system. MVT is a more ``efficient'' user of resources. MFT suffers with the problem of internal fragmentation
-    and MVT suffers with external fragmentation.</p>
-<div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 25px; margin-bottom: 50px;">
-    <a href="/memory-allocation/mvt/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
-    <a href="/memory-allocation/mvt/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>
-    <a href="/memory-allocation/mvt/worst-fit"><button class="btn btn-success btn-lg">Worst Fit</button></a>
-</div>
+<center><h1>Multiprogramming with Variable Tasks (MVT)</h1></center>
+<section>
+    <p>
+        <strong>MVT (Multiprogramming with a Variable number of Tasks)</strong> is a memory management technique where each job gets 
+        exactly the amount of memory it needs. Unlike MFT, memory partitioning is dynamic — it changes as jobs enter and exit the system.
+    </p>
+    <p>
+        MVT is more efficient in memory usage compared to MFT, as it minimizes internal fragmentation. However, it can suffer from 
+        <strong>external fragmentation</strong> as free memory blocks may be scattered and unusable for larger processes.
+    </p>
+    <div class="btn-group">
+        <a href="/memory-allocation/mvt/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
+        <a href="/memory-allocation/mvt/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>
+        <a href="/memory-allocation/mvt/worst-fit"><button class="btn btn-success btn-lg">Worst Fit</button></a>
+    </div>
+</section>
 {% endblock %}

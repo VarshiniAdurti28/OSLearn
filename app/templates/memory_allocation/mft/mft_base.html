@@ -1,59 +1,90 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  MFT - {{ algo }}
+MFT - {{ algo }}
 {% endblock %}
 
 {% block style %}
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+<style>
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1200px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .col-md-3 {
+        min-width: 300px;
+    }
+
+    #canvas {
+        margin-top: 30px;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
-  <h1>MFT - {{ algo }}</h1>
-  <section>
+<h1>MFT - {{ algo }}</h1>
+<section>
     <h2>Simulation</h2>
     <div class="row">
-        <div class="col-md-3  m-5">
-            <div class="m-2">
-                <div class="form-group">
-                    <label class="form-label">Number of partitions</label>
-                    <input type="text" class="form-control" id="num-parts" placeholder="Number of partitions">
-                </div>
-                <button type="submit" class="btn btn-primary" id="num-parts-btn">Next</button>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Number of partitions</label>
+                <input type="text" class="form-control" id="num-parts" placeholder="Number of partitions">
+                <button type="submit" class="btn btn-primary mt-2" id="num-parts-btn">Next</button>
             </div>
-            <div id="parts-size-form" class="m-2">
-            </div>
+            <div id="parts-size-form"></div>
         </div>
-        <div class="col-md-3 m-5">
-            <div id="add-rem-pro-btns">
-            </div>
-            <div class="m-2" id="add-rem-pro">
-            </div>
-            <div id="canvas" class="ml-5 mt-5">
-            </div>
+
+        <div class="col-md-3">
+            <div id="add-rem-pro-btns"></div>
+            <div id="add-rem-pro"></div>
+            <div id="canvas"></div>
         </div>
-        <div class="col-md-3 m-5">
-            <div id="input-q-table">
-            </div>
+
+        <div class="col-md-3">
+            <div id="input-q-table"></div>
         </div>
     </div>
-    {% block algo_link %}
-    {% endblock %}
-    {% block sim %}
-    {% endblock %}
-  </section>
+
+    {% block algo_link %}{% endblock %}
+    {% block sim %}{% endblock %}
+</section>
 {% endblock %}

@@ -1,5 +1,92 @@
-{% extends 'memory_allocation/mvt/mvt_base.html' %}
+{% extends 'base.html' %}
 
-{% block algo_link %}
+{% block link %}
   <script type="module" src="/static/js/memory_allocation/mvt/worst_fit.js"></script>
+{% endblock %}
+
+{% block title %}
+MVT - Worst Fit
+{% endblock %}
+
+{% block style %}
+<style>
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1200px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .col-md-3 {
+        min-width: 300px;
+    }
+
+    #canvas {
+        margin-top: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>MVT - Worst Fit</h1>
+
+<section>
+    <h2>Simulation</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Size of memory</label>
+                <input type="text" class="form-control" id="mem-size" placeholder="Enter size of memory">
+                <button type="submit" class="btn btn-primary mt-2" id="mem-size-btn">Go</button>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="add-rem-pro-btns"></div>
+            <div id="add-rem-pro"></div>
+            <div id="canvas"></div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="compaction"></div>
+            <div id="input-q-table"></div>
+        </div>
+    </div>
+</section>
 {% endblock %}

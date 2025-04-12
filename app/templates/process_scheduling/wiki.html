@@ -4,34 +4,117 @@
 Process Scheduling
 {% endblock %}
 
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #007bff;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-success:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-result {
+        padding: 8px 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    dl {
+        margin-top: 30px;
+    }
+
+    dt {
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #0a4b78;
+    }
+
+    dd {
+        margin-left: 20px;
+        font-size: 1.1em;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+{% endblock %}
+
 {% block body %}
 <h1>Process Scheduling</h1>
-<p>The process scheduling is the activity of the process manager that handles the removal of the running process from
-    the CPU and the selection of another process on the basis of a particular strategy.</p>
 
-<p>Process scheduling is an essential part of a Multiprogramming operating systems. Such operating systems allow more
-    than one process to be loaded into the executable memory at a time and the loaded process shares the CPU using time
-    multiplexing.</p>
+<section>
+    <h2>Overview</h2>
+    <p>Process scheduling is a vital task in the operating system's process manager, responsible for managing the removal of the running process from the CPU and the selection of the next process to execute based on specific scheduling strategies.</p>
 
-<p>There are three types of process scheduler.</p>
+    <p>In a multiprogramming operating system, multiple processes are loaded into memory and share the CPU using time multiplexing. The process scheduler ensures that the CPU is utilized effectively by deciding which process should run next.</p>
 
-<dl>
-    <dt>Long Term or Job Scheduler</dt>
-    <dd>It brings the new process to the ‘Ready State’. It controls Degree of Multi-programming, i.e., number of process
-        present in ready state at any point of time. It is important that the long-term scheduler make a careful
-        selection of both IO and CPU bound process. IO bound tasks are which use much of their time in input and output
-        operations while CPU bound processes are which spend their time on CPU. The job scheduler increases efficiency
-        by maintaining a balance between the two.
-    </dd>
-    <dt>Short Term or CPU Scheduler</dt>
-    <dd>It is responsible for selecting one process from ready state for scheduling it on the running state. Note: Short-term
-        scheduler only selects the process to schedule it doesn’t load the process on running. Here is when all the scheduling
-        algorithms are used. The CPU scheduler is responsible for ensuring there is no starvation owing to high burst time
-        processes.</dd>
-    <dt>Medium Term Scheduler</dt>
-    <dd>It is responsible for suspending and resuming the process. It mainly does swapping (moving processes from main memory to
-        disk and vice versa). Swapping may be necessary to improve the process mix or because a change in memory requirements
-        has overcommitted available memory, requiring memory to be freed up. It is helpful in maintaining a perfect balance
-        between the I/O bound and the CPU bound. It reduces the degree of multiprogramming.</dd>
-</dl>
+    <h2>Types of Process Schedulers</h2>
+    <p>There are three main types of process schedulers, each serving a unique function in the system:</p>
+
+    <dl>
+        <dt><strong>Long-Term or Job Scheduler</strong></dt>
+        <dd>The long-term scheduler selects processes from the pool of new processes and moves them to the 'Ready State'. It controls the degree of multiprogramming by managing the number of processes in the ready queue at any time. This scheduler ensures a balanced mix of CPU-bound and I/O-bound processes, maximizing system efficiency.</dd>
+
+        <dt><strong>Short-Term or CPU Scheduler</strong></dt>
+        <dd>The short-term scheduler is responsible for selecting a process from the ready state and assigning it to the CPU for execution. It uses scheduling algorithms to decide which process runs next. The CPU scheduler ensures that no process starves by managing CPU time allocation effectively.</dd>
+
+        <dt><strong>Medium-Term Scheduler</strong></dt>
+        <dd>The medium-term scheduler handles process suspension and resumption. It is responsible for swapping processes in and out of main memory to optimize memory use. This scheduler also helps maintain an ideal balance between I/O-bound and CPU-bound processes by adjusting the degree of multiprogramming as needed.</dd>
+    </dl>
+
+</section>
 {% endblock %}

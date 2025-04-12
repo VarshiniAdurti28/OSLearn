@@ -1,12 +1,112 @@
 {% extends 'process_scheduling/ps_base.html' %}
 
+{% block title %}
+FCFS
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #007bff;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-success:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-result {
+        padding: 8px 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    dl {
+        margin-top: 30px;
+    }
+
+    dt {
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #0a4b78;
+    }
+
+    dd {
+        margin-left: 20px;
+        font-size: 1.1em;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
 {% block algo_link %}
 <script src="/static/js/process_scheduling/fcfs.js"></script>
 {% endblock %}
 
 {% block wiki %}
-<p>FCFS (First Come First Serve) follows the principle of FIFO (First-in-First-out). It is the simplest scheduling
-  algorithm. FCFS simply queues processes in the order that they arrive in the ready queue. In this, the process which
-  comes first will be executed first and the next process starts only after the previous gets fully executed. It is a
-  non-preemptive algorithm.</p>
+<section>
+    <h2>What is FCFS?</h2>
+    <p>
+        FCFS (First Come First Serve) is a non-preemptive scheduling algorithm that executes processes in the order they arrive in the ready queue. The process that arrives first is executed first, and the next process starts only after the previous process completes execution.
+    </p>
+    <p>
+        It is the simplest form of scheduling, where there is no prioritization or interruption. Each process is executed until completion, which means no preemption occurs. While simple, it can lead to inefficiencies such as the "convoy effect," where shorter processes may be delayed by longer ones.
+    </p>
+    <p>
+        In FCFS, the key concept is that the CPU handles processes in a strict FIFO (First In, First Out) order. As such, the algorithm may not always be optimal in terms of average waiting time or turnaround time.
+    </p>
+</section>
 {% endblock %}

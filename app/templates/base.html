@@ -217,13 +217,24 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
+              <li class="nav-item dropdown">
                 <a
-                  class="nav-link"
-                  aria-current="page"
-                  href="/memory-allocation"
-                  >Memory Management</a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMemory"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
+                  Memory Management
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMemory">
+                  <li><a class="dropdown-item" href="/memory-allocation">Wiki</a></li>
+                  <li><a class="dropdown-item" href="/memory-allocation/mft">MFT</a></li>
+                  <li><a class="dropdown-item" href="/memory-allocation/mvt">MVT</a></li>
+                  <li><a class="dropdown-item" href="/memory-allocation/paging">Paging</a></li>
+                  <li><a class="dropdown-item" href="/memory-allocation/segmentation">Segmentation</a></li>
+                </ul>
               </li>
               <li class="nav-item dropdown">
                 <a

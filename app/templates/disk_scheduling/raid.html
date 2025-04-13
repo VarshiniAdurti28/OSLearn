@@ -1,0 +1,290 @@
+{% extends 'disk_scheduling/ds_base.html' %}
+
+
+{% block title %}RAID Disk Management{% endblock %}
+
+{% block style %}
+<style>
+    .raid-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .raid-viz {
+        height: 400px;
+        margin: 2rem 0;
+        border: 2px solid #dee2e6;
+        border-radius: 0.5rem;
+    }
+
+    .raid-level {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: #f8fafc;
+        border-radius: 0.5rem;
+    }
+
+    h2 {
+        color: #2b6cb0;
+        font-weight: 700;
+    }
+
+    .raid-desc {
+        margin-top: 1rem;
+        color: #4a5568;
+    }
+</style>
+{% endblock %}
+
+{% block wiki %}
+<div class="raid-container">
+    <h2>RAID (Redundant Array of Independent/Inexpensive Disks)</h2>
+    <p>
+        RAID is a storage technology that combines multiple physical disks into a single logical unit to improve
+        performance, reliability, or both.
+        Originally introduced in 1987, RAID is divided into several levels, each offering different benefits based on
+        the use case.
+    </p>
+
+    <h2>Key Features of RAID</h2>
+    <ul>
+        <li><strong>Performance:</strong> Certain RAID levels improve read and write speeds by distributing data across
+            multiple disks.</li>
+        <li><strong>Redundancy:</strong> RAID provides fault tolerance and protects against data loss in the event of
+            disk failure.</li>
+        <li><strong>Scalability:</strong> RAID solutions can handle large volumes of data efficiently.</li>
+    </ul>
+
+    <h2>RAID Levels</h2>
+
+    <!-- RAID 0 -->
+    <div class="raid-level">
+        <h3>RAID 0 - Striping</h3>
+        <p>RAID 0 splits data into blocks and stripes them across multiple disks, improving performance by enabling
+            parallel data access.</p>
+        <h4>Advantages:</h4>
+        <ul>
+            <li>High performance for read/write operations.</li>
+            <li>Maximum utilization of storage space.</li>
+        </ul>
+        <h4>Disadvantages:</h4>
+        <ul>
+            <li>No redundancy; a single disk failure results in complete data loss.</li>
+            <li>Not suitable for mission-critical applications.</li>
+        </ul>
+    </div>
+
+    <!-- RAID 1 -->
+    <div class="raid-level">
+        <h3>RAID 1 - Mirroring</h3>
+        <p>RAID 1 duplicates (mirrors) data across two or more disks, ensuring redundancy.</p>
+        <h4>Advantages:</h4>
+        <ul>
+            <li>100% data redundancy.</li>
+            <li>Improved read performance (as mirrored disks can be read simultaneously).</li>
+        </ul>
+        <h4>Disadvantages:</h4>
+        <ul>
+            <li>Storage efficiency is only 50%; i.e., half the storage is used for redundancy.</li>
+            <li>Higher cost due to the need for duplicate storage.</li>
+        </ul>
+    </div>
+
+    <!-- RAID 5 -->
+    <div class="raid-level">
+        <h3>RAID 5 - Striping with Parity</h3>
+        <p>RAID 5 distributes data and parity information (used for redundancy) across multiple disks.</p>
+        <h4>Advantages:</h4>
+        <ul>
+            <li>Balanced performance and redundancy.</li>
+            <li>Efficient storage utilization (n-1 disks; parity is stored on one disk).</li>
+        </ul>
+        <h4>Disadvantages:</h4>
+        <ul>
+            <li>Slower write performance due to parity calculations.</li>
+            <li>Complex rebuild process in the event of a disk failure.</li>
+        </ul>
+    </div>
+
+    <!-- RAID 10 -->
+    <div class="raid-level">
+        <h3>RAID 10 - Mirroring + Striping</h3>
+        <p>RAID 10 combines RAID 0 striping with RAID 1 mirroring, offering both performance and redundancy.</p>
+        <h4>Advantages:</h4>
+        <ul>
+            <li>High performance and fault tolerance.</li>
+            <li>Faster rebuild times than RAID 5.</li>
+        </ul>
+        <h4>Disadvantages:</h4>
+        <ul>
+            <li>Higher cost due to the need for multiple disks (requires at least 4 disks).</li>
+            <li>Storage efficiency is only 50%.</li>
+        </ul>
+    </div>
+
+    <h2>Other RAID Levels</h2>
+    <ul>
+        <li><strong>RAID 4:</strong> Similar to RAID 5 but uses a single dedicated parity disk.</li>
+        <li><strong>RAID 6:</strong> Like RAID 5 but uses two parity disks for greater fault tolerance.</li>
+        <li><strong>RAID Hybrid Levels:</strong> Combines features of multiple RAID levels, such as RAID 50 (RAID 5+0).
+        </li>
+    </ul>
+
+    <h2>Summary</h2>
+    <p>
+        RAID solutions are key to modern storage systems, offering scalability, redundancy, and performance. However,
+        choosing the right RAID level depends on the specific requirements of the application, such as performance
+        needs, fault tolerance, and cost considerations.
+        While RAID provides hardware-level solutions to enhance disk performance and reliability, it works in
+        conjunction with software-level disk scheduling algorithms, which optimize disk access for individual processes.
+    </p>
+</div>
+
+    <h1>Simulations</h1>
+    <ul>
+        <li><strong>RAID 0 (Striping):</strong> Splits data evenly across two or more disks with no redundancy. Fast, but no
+            fault tolerance.</li>
+        <li><strong>RAID 1 (Mirroring):</strong> Duplicates the same data on two disks. High redundancy, but only 50% usable
+            storage.</li>
+        <li><strong>RAID 5 (Striping with Parity):</strong> Distributes data and parity blocks across three or more disks.
+            Offers both redundancy and efficiency.</li>
+    </ul>
+    <div style="margin-bottom: 2rem;">
+        <label for="num-disks">Number of Disks:</label>
+        <input type="number" id="num-disks" value="2" min="2" max="10" style="margin-right: 1rem;">
+
+        <label for="num-blocks">Number of Data Blocks:</label>
+        <input type="number" id="num-blocks" value="4" min="1" max="20" style="margin-right: 1rem;">
+
+        <label for="raid-level">RAID Level:</label>
+        <select id="raid-level">
+            <option value="0">RAID 0</option>
+            <option value="1">RAID 1</option>
+            <option value="5">RAID 5</option>
+        </select>
+
+        <button onclick="generateRAIDChart()">Generate</button>
+    </div>
+
+    <!-- Chart containers -->
+    <div id="raid-chart" class="raid-viz"></div>
+</div>
+
+{% endblock %}
+{% block algo_link %}
+<script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+
+    function generateRAIDChart() {
+        const numDisks = parseInt(document.getElementById("num-disks").value);
+        const numBlocks = parseInt(document.getElementById("num-blocks").value);
+        const raidLevel = parseInt(document.getElementById("raid-level").value);
+
+        if (raidLevel === 1 && numDisks < 2) {
+            alert("RAID 1 requires at least 2 disks.");
+            return;
+        }
+
+        if (raidLevel === 5 && numDisks < 3) {
+            alert("RAID 5 requires at least 3 disks.");
+            return;
+        }
+
+        const labels = Array.from({ length: numBlocks }, (_, i) => `Block ${i + 1}`);
+        const series = Array.from({ length: numDisks }, () => ({ values: [] }));
+
+        if (raidLevel === 0) {
+            // RAID 0 - Striping
+            for (let i = 0; i < numBlocks; i++) {
+                const diskIndex = i % numDisks;
+                for (let d = 0; d < numDisks; d++) {
+                    series[d].values.push(d === diskIndex ? 1 : 0);
+                }
+            }
+        }
+
+        if (raidLevel === 1) {
+            // RAID 1 - Mirroring
+            for (let i = 0; i < numBlocks; i++) {
+                for (let d = 0; d < numDisks; d++) {
+                    series[d].values.push(1); // All disks mirror same data
+                }
+            }
+        }
+
+        if (raidLevel === 5) {
+            // RAID 5 - Striping with rotating parity
+            for (let i = 0; i < numBlocks; i++) {
+                const parityDisk = i % numDisks;
+                let dataIndex = 0;
+                for (let d = 0; d < numDisks; d++) {
+                    if (d === parityDisk) {
+                        series[d].values.push(2); // 2 = Parity
+                    } else {
+                        series[d].values.push(1); // 1 = Data
+                        dataIndex++;
+                    }
+                }
+            }
+        }
+
+        // Render chart
+        zingchart.render({
+            id: 'raid-chart',
+            data: {
+                type: 'bar',
+                title: {
+                    text: `RAID ${raidLevel} Visualization`
+                },
+                scaleX: {
+                    label: { text: "Blocks" },
+                    labels: labels
+                },
+                scaleY: {
+                    label: { text: "Disk Usage" }
+                },
+                plot: {
+                    tooltip: {
+                        text: "%t - %v"
+                    },
+                    valueBox: {
+                        visible: true,
+                        text: "%v"
+                    }
+                },
+                series: series.map((s, i) => ({
+                    values: s.values,
+                    text: `Disk ${i + 1}`,
+                    backgroundColor: getColor(i)
+                }))
+            }
+        });
+    }
+
+    function getColor(index) {
+        const colors = ['#3e95cd', '#8e5ea2', '#d45087', '#ff7c43', '#2ca02c', '#f95d6a', '#ffa600', '#17becf'];
+        return colors[index % colors.length];
+    }
+
+    // Initial chart on load
+    document.addEventListener("DOMContentLoaded", generateRAIDChart);
+</script>
+{% endblock %}
+{% block sim %}
+<style>
+    /* Hide the Simulation section */
+    section:has(#head) {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+<div style="margin-top: 1rem;">
+    <span style="color:#3e95cd;">■</span> Data &nbsp;
+    <span style="color:#d45087;">■</span> Parity (for RAID 5)
+</div>

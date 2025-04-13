@@ -1,12 +1,131 @@
 {% extends 'disk_scheduling/ds_base.html' %}
 
+{% block title %}
+SCAN Disk Scheduling Algorithm
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #007bff;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-success:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-result {
+        padding: 8px 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    #chartContainer {
+        margin-top: 40px;
+        width: 100%;
+        height: 500px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        padding: 8px;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .form-group button {
+        font-weight: bold;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    .form-group button:hover {
+        background-color: #0056b3;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+{% endblock %}
+
 {% block algo_link %}
 <script type="module" src="/static/js/disk_scheduling/scan.js"></script>
 {% endblock %}
 
 {% block wiki %}
-<p>In SCAN algorithm the disk arm moves into a particular direction and services the requests coming in its path and
-  after reaching the end of disk, it reverses its direction and again services the request arriving in its path. So,
-  this algorithm works as an elevator and hence also known as elevator algorithm. As a result, the requests at the
-  midrange are serviced more and those arriving behind the disk arm will have to wait.</p>
+<section>
+    <h1>SCAN Disk Scheduling Algorithm</h1>
+
+    <h2>Overview</h2>
+    <p>In SCAN algorithm, the disk arm moves in a particular direction and services the requests coming in its path. After reaching the end of the disk, it reverses its direction and again services the requests arriving in its path.</p>
+    <p>This behavior resembles an elevator, which is why it is also called the <strong>Elevator Algorithm</strong>. Requests closer to the center tend to be served more frequently, while those farther away might experience longer wait times.</p>
+
+    <h2>Advantages</h2>
+    <ul>
+        <li>Reduces variance in response time compared to FCFS.</li>
+        <li>Prevents starvation of requests.</li>
+    </ul>
+
+    <h2>Disadvantages</h2>
+    <ul>
+        <li>May cause longer waiting times for requests just missed in one pass.</li>
+        <li>More complex than FCFS in implementation.</li>
+    </ul>
+</section>
 {% endblock %}

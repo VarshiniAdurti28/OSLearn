@@ -1,14 +1,130 @@
 {% extends 'disk_scheduling/ds_base.html' %}
 
+{% block title %}
+CSCAN Disk Scheduling Algorithm
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #007bff;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-success:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-result {
+        padding: 8px 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    #chartContainer {
+        margin-top: 40px;
+        width: 100%;
+        height: 500px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        padding: 8px;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .form-group button {
+        font-weight: bold;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    .form-group button:hover {
+        background-color: #0056b3;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+{% endblock %}
+
 {% block algo_link %}
 <script type="module" src="/static/js/disk_scheduling/cscan.js"></script>
 {% endblock %}
 
 {% block wiki %}
-<p>In SCAN algorithm, the disk arm again scans the path that has been scanned, after reversing its direction. So, it may
-  be possible that too many requests are waiting at the other end or there may be zero or few requests pending at the
-  scanned area.</p>
-<p>These situations are avoided in CSCAN algorithm in which the disk arm instead of reversing its direction goes to the
-  other end of the disk and starts servicing the requests from there. So, the disk arm moves in a circular fashion and
-  this algorithm is also similar to SCAN algorithm and hence it is known as C-SCAN (Circular SCAN). </p>
+<section>
+    <h1>CSCAN Disk Scheduling Algorithm</h1>
+
+    <h2>Overview</h2>
+    <p>The CSCAN algorithm improves upon SCAN by treating the disk as a circular list. Instead of reversing direction after reaching the end, the disk arm jumps to the beginning and starts servicing requests again.</p>
+
+    <h2>Advantages</h2>
+    <ul>
+        <li>Provides more uniform wait time compared to SCAN.</li>
+        <li>Fairer for requests across the disk surface.</li>
+    </ul>
+
+    <h2>Disadvantages</h2>
+    <ul>
+        <li>May result in longer total head movements due to the jump from end to start.</li>
+        <li>More complex than FCFS or simple SCAN.</li>
+    </ul>
+</section>
 {% endblock %}

@@ -1,115 +1,108 @@
 import { getReferenceString } from "./ds_base.js";
 
 $(document).ready(function () {
-  // var dp_fcfs = [];
-  // var dp_sstf = [];
-  // var dp_scan = [];
   var dp_scan = [];
-  // var dp_look = [];
-  // var dp_clook = [];
-  // var fcfs_values = [];
-  // var sstf_values=[];
-  // var scan_values = [];
-  var scan_values=[];
-  // var look_values = [];
-  // var clook_values = [];
+  var scan_values = [];
   var data_scan = {};
 
   $("#calc").click(function calculate() {
     scan_values = [];
     dp_scan = [];
     data_scan = [];
-    var i;
     var sum = 0;
-    var diff;
 
     var head = parseInt(document.getElementsByTagName("input")[0].value);
-    var max = parseInt(document.getElementsByTagName("input")[2].value);
     var min = parseInt(document.getElementsByTagName("input")[1].value);
+    var max = parseInt(document.getElementsByTagName("input")[2].value);
+
     if (head > max) {
-      alert("fcfs head is larger than last cylinder number");
-      return -10;
+      alert("Head is larger than the last cylinder number.");
+      return;
     }
 
     if (head < min) {
-      alert("fcfs head is smaller than first cylinder number");
-      return -10;
+      alert("Head is smaller than the first cylinder number.");
+      return;
     }
 
     scan_values.push(head);
     var in_arr = getReferenceString(head, max, min);
-
-    //sort the inputs
-    in_arr.sort(function(a, b){return a - b});
-    
-    sum = sum + (max - head);
-    
-    var temp;
-    var i,j,flag;
-
-    for(i=in_arr.length-1;i>=0;--i)	
-    {			
-        var p = parseInt(in_arr[i]);
-        if(p < head)
-        {
-            flag = i+1;
-            break;
-        }
+    if (!in_arr.length) {
+      alert("Reference string is empty!");
+      return;
     }
 
-    var p_i;
-    for(j=flag;j<in_arr.length;++j)
-    {
-        p_i = parseInt(in_arr[j]);
-        scan_values.push(p_i);
+    // Sort inputs
+    in_arr.sort(function (a, b) {
+      return a - b;
+    });
+
+    let flag;
+    for (let i = in_arr.length - 1; i >= 0; --i) {
+      if (parseInt(in_arr[i]) < head) {
+        flag = i + 1;
+        break;
+      }
     }
 
+    // Move right (towards max)
+    for (let j = flag; j < in_arr.length; ++j) {
+      scan_values.push(parseInt(in_arr[j]));
+    }
     scan_values.push(max);
 
-    for(j=flag-1; j>=0 ;--j)
-    {
-        p_i = parseInt(in_arr[j]);
-        scan_values.push(p_i);
+    // Move left (towards min)
+    for (let j = flag - 1; j >= 0; --j) {
+      scan_values.push(parseInt(in_arr[j]));
     }
 
-    var int = parseInt(in_arr[0]);
-    sum = sum + (max - int);
+    // Calculate total head movement
+    for (let i = 1; i < scan_values.length; i++) {
+      sum += Math.abs(scan_values[i] - scan_values[i - 1]);
+    }
 
     allocate_scan();
+    alert("Total head movement: " + sum);
     return sum;
   });
 
-  function allocate_scan(){
-    var d=-1;
-    for(var i=0;i<scan_values.length;++i)
-    {
-        d++;
-        var a = parseInt(scan_values[i]);
-        dp_scan.push([a,d]);
+  function allocate_scan() {
+    var d = -1;
+    for (var i = 0; i < scan_values.length; ++i) {
+      d++;
+      var a = parseInt(scan_values[i]);
+      dp_scan.push([a, d]);
     }
-      data_scan = {
-      values: dp_scan,
+    data_scan = {
+      values: dp_scan
     };
-      scanModal();
-}
+    scanModal();
+  }
 
-  function scanModal()
-{
+  function scanModal() {
     var max_val = document.getElementsByTagName("input")[2].value;
     zingchart.render({
-    id:"chartContainer",
-    output:"svg",
-    height:500,
-    width:"80%",
-    data:{
-        "type":"line",
-        "title":{
-            "text":"SCAN Header Movement"
+      id: "chartContainer",
+      output: "svg",
+      height: 500,
+      width: "80%",
+      data: {
+        type: "line",
+        title: {
+          text: "SCAN Head Movement"
         },
-        "series":[
-            data_scan
-        ]
-    }
-    });	
-}
+        series: [data_scan]
+      },
+      "scale-x": {
+        title: {
+          text: "Request Track Number"
+        }
+      },
+      "scale-y": {
+        title: "Head Movement (Distance)"
+      }
+    });
+
+    $("#chartContainer").removeClass("hidden");
+  }
 });

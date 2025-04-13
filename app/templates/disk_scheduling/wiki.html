@@ -4,27 +4,121 @@
 Disk Scheduling
 {% endblock %}
 
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #007bff;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-success:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-result {
+        padding: 8px 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    dl {
+        margin-top: 30px;
+    }
+
+    dt {
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #0a4b78;
+    }
+
+    dd {
+        margin-left: 20px;
+        font-size: 1.1em;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
 <h1>Disk Scheduling</h1>
-<p>Disk scheduling is done by operating systems to schedule I/O requests arriving for the disk. Disk scheduling is also
-    known as I/O scheduling. Disk scheduling is important because:
-</p>
-<ul>
-    <li>Multiple I/O requests may arrive by different processes and only one I/O request can be served at a time by the
-        disk
-        controller. Thus other I/O requests need to wait in the waiting queue and need to be scheduled.</li>
-    <li>Two or more request may be far from each other so can result in greater disk arm movement.</li>
-    <li>Hard drives are one of the slowest parts of the computer system and thus need to be accessed in an efficient
-        manner.</li>
-</ul>
-<p>There are many Disk Scheduling Algorithms but before discussing them let’s have a quick look at some of the important
-    terms:</p>
-<ul>
-    <li><b>Seek Time</b>: Seek time is the time taken to locate the disk arm to a specified track where the data is to be read or write.
-        So the disk scheduling algorithm that gives minimum average seek time is better.</li>
-    <li><b>Rotational Latency</b>: Rotational Latency is the time taken by the desired sector of disk to rotate into a position so that
-        it can access the read/write heads. So the disk scheduling algorithm that gives minimum rotational latency is better.</li>
-    <li><b>Transfer Time</b>: Transfer time is the time to transfer the data. It depends on the rotating speed of the disk and number
-        of bytes to be transferred.</li>
-</ul>
+
+<section>
+    <h2>Overview</h2>
+    <p>Disk scheduling is done by operating systems to schedule I/O requests arriving for the disk. Disk scheduling is
+        also known as I/O scheduling. It is crucial for optimizing the performance of the system because:</p>
+    <ul>
+        <li>Multiple I/O requests may arrive from different processes, and only one I/O request can be served at a time
+            by the disk controller. Thus, other I/O requests need to wait in the waiting queue and need to be scheduled.
+        </li>
+        <li>Two or more requests may be far from each other, which could result in greater disk arm movement.</li>
+        <li>Hard drives are one of the slowest parts of the computer system, so efficient disk access is necessary.</li>
+    </ul>
+
+    <h2>Important Terms in Disk Scheduling</h2>
+    <p>Before diving into the disk scheduling algorithms, let’s have a quick look at some important terms:</p>
+    <ul>
+        <li><b>Seek Time</b>: Seek time is the time taken for the disk arm to locate a specified track where the data is
+            to be read or written. The disk scheduling algorithm that minimizes the average seek time is preferable.
+        </li>
+        <li><b>Rotational Latency</b>: Rotational latency is the time taken for the desired disk sector to rotate into
+            position so that the read/write heads can access it. A scheduling algorithm that minimizes rotational
+            latency is better.</li>
+        <li><b>Transfer Time</b>: Transfer time refers to the time required to transfer data. It depends on the disk's
+            rotational speed and the number of bytes to be transferred.</li>
+    </ul>
+</section>
 {% endblock %}

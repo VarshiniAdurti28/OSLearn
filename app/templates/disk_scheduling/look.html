@@ -1,13 +1,166 @@
 {% extends 'disk_scheduling/ds_base.html' %}
 
+{% block title %}
+LOOK Disk Scheduling Algorithm
+{% endblock %}
+
+{% block style %}
+<style>
+  .nav-container {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .btn-back {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .btn-back:hover {
+    background-color: #2563eb;
+    color: white;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    color: #111;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 30px;
+    color: #0a4b78;
+  }
+
+  section {
+    margin: 40px auto;
+    max-width: 1000px;
+    padding: 30px;
+    background-color: rgba(144, 213, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+  }
+
+  .container {
+    padding: 20px 0;
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .btn-success {
+    background-color: #007bff;
+    border: none;
+    font-weight: bold;
+  }
+
+  .btn-success:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-result {
+    padding: 8px 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .btn-green {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn-red {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  #chartContainer {
+    margin-top: 40px;
+    width: 100%;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-control {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .form-group button {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .form-group button:hover {
+    background-color: #0056b3;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+{% endblock %}
+
 {% block algo_link %}
 <script type="module" src="/static/js/disk_scheduling/look.js"></script>
 {% endblock %}
 
 {% block wiki %}
-<p>LOOK is the advanced version of SCAN (elevator) disk scheduling algorithm which gives slightly better seek time than
-  any other algorithm in the hierarchy (FCFS->SRTF->SCAN->C-SCAN->LOOK). The LOOK algorithm services request similarly
-  as SCAN algorithm meanwhile it also “looks” ahead as if there are more tracks that are needed to be serviced in the
-  same direction. If there are no pending requests in the moving direction the head reverses the direction and start
-  servicing requests in the opposite direction.</p>
+<section>
+  <h1>LOOK Disk Scheduling Algorithm</h1>
+
+  <h2>Overview</h2>
+  <p>The LOOK scheduling algorithm works similarly to the SCAN algorithm but avoids traversing to the extreme ends of
+    the disk. The disk arm moves in one direction, servicing all requests in its path, and reverses direction once it
+    reaches the last request in that direction. It is more efficient than SCAN in certain cases because it minimizes
+    unnecessary head movements.</p>
+
+  <h2>Advantages</h2>
+  <ul>
+    <li>Minimizes unnecessary head movements.</li>
+    <li>Reduces overall seek time compared to SCAN.</li>
+  </ul>
+
+  <h2>Disadvantages</h2>
+  <ul>
+    <li>May cause longer waiting times for requests just missed in one pass.</li>
+    <li>Complex implementation compared to FCFS.</li>
+  </ul>
+</section>
+{% endblock %}
+{% block content %}
+<!-- Existing content -->
+<div class="container">
+  <!-- Your existing form elements -->
+  <div id="chartContainer"></div>
+
+  <!-- Add this navigation section -->
+  <div class="nav-container">
+    <a href="/disk-scheduling/compare" class="btn-back">
+      ← Back to Algorithm Comparison
+    </a>
+  </div>
+</div>
 {% endblock %}

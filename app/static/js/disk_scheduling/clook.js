@@ -1,108 +1,105 @@
 import { getReferenceString } from "./ds_base.js";
 
 $(document).ready(function () {
-    // var dp_fcfs = [];
-    // var dp_sstf = [];
-    // var dp_scan = [];
-    // var dp_scan = [];
-    // var dp_look = [];
-    var dp_clook = [];
-    // var fcfs_values = [];
-    // var sstf_values=[];
-    // var scan_values = [];
-    // var scan_values=[];
-    // var look_values = [];
-    var clook_values = [];
-    var data_clook = {};
+    // Auto-load comparison data
+    const savedData = localStorage.getItem('diskData');
+    if (savedData) {
+        const { head, min, max, requests } = JSON.parse(savedData);
+        $("#head").val(head);
+        $("#min").val(min);
+        $("#max").val(max);
+        $("#reference-string").val(requests.join(" "));
+        setTimeout(calculateClook, 100); // Auto-calculate after short delay
+    }
+  let dp_clook = [];
+  let clook_values = [];
+  let data_clook = {};
 
-    $("#calc").click(function calculate() {
-        clook_values = [];
-        dp_clook = [];
-        data_clook = [];
-        var i;
-        var sum = 0;
-        var diff;
+  $("#calc").click(function calculateClook() {
+    clook_values = [];
+    dp_clook = [];
+    data_clook = [];
+    let totalMovement = 0;
 
-        var head = parseInt(document.getElementsByTagName("input")[0].value);
-        var max = parseInt(document.getElementsByTagName("input")[2].value);
-        var min = parseInt(document.getElementsByTagName("input")[1].value);
-        if (head > max) {
-            alert("fcfs head is larger than last cylinder number");
-            return -10;
+    // Get user inputs
+    let head = parseInt(document.getElementsByTagName("input")[0].value);
+    let min = parseInt(document.getElementsByTagName("input")[1].value);
+    let max = parseInt(document.getElementsByTagName("input")[2].value);
+
+    if (head > max || head < min) {
+      alert("The head position must be within the range of cylinders.");
+      return;
+    }
+
+    // Get reference string
+    clook_values.push(head);
+    let in_arr = getReferenceString(head, max, min);
+    if (!in_arr.length) {
+      alert("Reference string is empty! Please provide valid inputs.");
+      return;
+    }
+
+    // Sort reference string
+    in_arr.sort((a, b) => a - b);
+
+    // Find the first request greater than the head position
+    let splitIndex = in_arr.findIndex((val) => val > head);
+
+    // C-LOOK logic
+    // First service higher requests (right side of the head)
+    if (splitIndex !== -1) {
+      clook_values.push(...in_arr.slice(splitIndex));
+    }
+    // Then wrap around to service lower requests (left side of the head)
+    clook_values.push(...in_arr.slice(0, splitIndex));
+
+    // Calculate total head movement
+    for (let i = 1; i < clook_values.length; i++) {
+      totalMovement += Math.abs(clook_values[i] - clook_values[i - 1]);
+    }
+
+    allocateClook();
+    alert("Total head movement with C-LOOK: " + totalMovement);
+  });
+
+  function allocateClook() {
+    let distance = -1;
+    for (let i = 0; i < clook_values.length; i++) {
+      distance++;
+      let position = parseInt(clook_values[i]);
+      dp_clook.push([position, distance]);
+    }
+    data_clook = {
+      values: dp_clook
+    };
+    renderClookChart();
+  }
+
+  function renderClookChart() {
+    zingchart.render({
+      id: "chartContainer",
+      output: "svg",
+      height: 500,
+      width: "80%",
+      data: {
+        type: "line",
+        title: {
+          text: "C-LOOK Head Movement Visualization"
+        },
+        series: [data_clook]
+      },
+      "scale-x": {
+        title: {
+          text: "Request Track Number"
         }
-
-        if (head < min) {
-            alert("fcfs head is smaller than first cylinder number");
-            return -10;
+      },
+      "scale-y": {
+        title: {
+          text: "Head Movement (Distance)"
         }
-
-        clook_values.push(head);
-        var in_arr = getReferenceString(head, max, min);
-        //sort the inputs
-        in_arr.sort(function (a, b) { return a - b });
-
-        var len = in_arr.length - 1;
-        var p = parseInt(in_arr[len]);
-        sum = sum + (p - head);
-
-        var temp;
-        var i, j, flag = 1;
-
-        for (i = in_arr.length - 1; i >= 0; --i) {
-            var p = parseInt(in_arr[i]);
-            if (p < head) {
-                flag = i + 1;
-                break;
-            }
-        }
-        var p_i;
-        for (j = flag; j < in_arr.length; ++j) {
-            p_i = parseInt(in_arr[j]);
-            clook_values.push(p_i);
-        }
-
-        for (j = 0; j <= flag - 1; ++j) {
-            p_i = parseInt(in_arr[j]);
-            clook_values.push(p_i);
-        }
-
-        var int = parseInt(in_arr[flag - 1]);
-        var int2 = parseInt(in_arr[0]);
-        sum = sum + (int - int2);
-
-        allocate_clook();
-        return sum;
+      }
     });
 
-    function allocate_clook() {
-        var d = -1;
-        for (var i = 0; i < clook_values.length; ++i) {
-            d++;
-            var a = parseInt(clook_values[i]);
-            dp_clook.push([a, d]);
-        }
-        data_clook = {
-            values: dp_clook,
-        };
-        clookModal();
-    }
-
-    function clookModal() {
-        var max_val = document.getElementsByTagName("input")[2].value;
-        zingchart.render({
-            id: "chartContainer",
-            output: "svg",
-            height: 500,
-            width: "80%",
-            data: {
-                "type": "line",
-                "title": {
-                    "text": "CLOOK Header Movement"
-                },
-                "series": [
-                    data_clook
-                ]
-            }
-        });
-    }
+    $("#chartContainer").removeClass("hidden");
+  }
 });

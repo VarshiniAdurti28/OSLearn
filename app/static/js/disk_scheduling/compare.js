@@ -1,44 +1,63 @@
 import { getReferenceString } from "./ds_base.js";
 
+// Store algorithm routes
+const ALGORITHM_ROUTES = {
+    FCFS: 'fcfs',
+    SSTF: 'sstf',
+    SCAN: 'scan',
+    CSCAN: 'cscan',
+    LOOK: 'look',
+    CLOOK: 'clook'
+};
+
 $(document).ready(function () {
-    var in_arr = [];
-    var head, max, min
+    let in_arr = [];
+    let head, max, min;
 
-    function getInputs() {
-        head = parseInt(document.getElementsByTagName("input")[0].value);
-    max = parseInt(document.getElementsByTagName("input")[2].value);
-    min = parseInt(document.getElementsByTagName("input")[1].value);
-    if (head > max) {
-      alert("fcfs head is larger than last cylinder number");
-      return -10;
+    function validateInputs() {
+        head = parseInt($("#head").val());
+        min = parseInt($("#min").val());
+        max = parseInt($("#max").val());
+
+        if (isNaN(head) || head < min || head > max) {
+            alert(`Head position must be between ${min} and ${max}`);
+            return false;
+        }
+
+        in_arr = getReferenceString(head, max, min);
+        if (in_arr.length < 3) {
+            alert("Minimum 3 requests required");
+            return false;
+        }
+
+        return true;
     }
 
-    if (head < min) {
-      alert("fcfs head is smaller than first cylinder number");
-      return -10;
-    }
+    $("#calc").click(function () {
+        if (!validateInputs()) return;
 
-    in_arr = getReferenceString(head, max, min);
-    }
+        // Store data for individual algorithm pages
+        localStorage.setItem('comparisonData', JSON.stringify({
+            head: head,
+            min: min,
+            max: max,
+            requests: in_arr
+        }));
 
-  $("#calc").click(function calculate() {
-      
-    getInputs();
+        // Calculate results
+        const results = {
+            FCFS: calculate_fcfs(),
+            SSTF: calculate_sstf(),
+            SCAN: calculate_scan(),
+            CSCAN: calculate_cscan(),
+            LOOK: calculate_look(),
+            CLOOK: calculate_clook()
+        };
 
-    var fcfsv=0,sstfv=0,scanv=0,cscanv=0,lookv=0,clookv=0;
+        renderComparisonChart(results);
+    });
 
-        fcfsv = calculate_fcfs();
-        sstfv = calculate_sstf();  
-        in_arr.sort(function(a, b){return a - b});
-        scanv = calculate_scan();    
-        cscanv = calculate_cscan();
-        lookv = calculate_look();
-        clookv = calculate_clook();
-      
-        show_graph(fcfsv,sstfv,scanv,cscanv,lookv,clookv);
-  });
-
-  function calculate_clook() {
+   function calculate_clook() {
     var i;
     var sum = 0;
     var diff;
@@ -197,49 +216,73 @@ $(document).ready(function () {
         return sum;
     }
 
-    window.onload = function () {
-        CanvasJS.addColorSet("myColors",
-                [//colorSet Array
-                "#5CDB95",
-                "#3500D3",
-                "#86C232",
-                "#FFE400",
-                "#FF652F",
-                "red"                
-                ]);
-    }
+    function show_graph(fcfs, sstf, scan, cscan, look, clook) {
+    // Store input fields and results in localStorage
+    const comparisonData = {
+        head: parseInt($("#head").val()),
+        min: parseInt($("#min").val()),
+        max: parseInt($("#max").val()),
+        requests: $("#reference").val(),
+        results: { fcfs, sstf, scan, cscan, look, clook }
+    };
+    localStorage.setItem("comparisonData", JSON.stringify(comparisonData));
 
-    function show_graph(fcfs,sstf,scan,cscan,look,clook)
-    {
-        
-        var chart = new CanvasJS.Chart("chartContainer", {
-        title:{
-            text: "RESULTS OF DISK SCHEDULING ALGORITHMS"              
-        },
-        
-        data: [              
-        {
-            // Change type to, "line", "splineArea", etc.
-            type: "column",				
+    // Render the chart
+    const chart = new CanvasJS.Chart("chartContainer", {
+        title: { text: "Algorithm Comparison Results" },
+        axisY: { title: "Total Head Movement" },
+        data: [{
+            type: "column",
             dataPoints: [
-                { label: "FCFS",  y: fcfs  },
-                { label: "SSTF", y: sstf  },
-                { label: "SCAN", y: scan  },
-                { label: "CSCAN",  y: cscan  },
-                { label: "LOOK",  y: look  },
-                { label: "CLOOK",  y: clook  }
+                { label: "FCFS", y: fcfs, click: () => navigateToAlgorithm("fcfs") },
+                { label: "SSTF", y: sstf, click: () => navigateToAlgorithm("sstf") },
+                { label: "SCAN", y: scan, click: () => navigateToAlgorithm("scan") },
+                { label: "CSCAN", y: cscan, click: () => navigateToAlgorithm("cscan") },
+                { label: "LOOK", y: look, click: () => navigateToAlgorithm("look") },
+                { label: "CLOOK", y: clook, click: () => navigateToAlgorithm("clook") }
             ]
-        }
-        ],
-
-        axisY:{
-            title:"Total Head Movement"
-        },
-
-        animationEnabled : true,
-        animationDuration :6000,
-        colorSet: "myColors"
+        }]
     });
+
     chart.render();
+}
+
+// Navigate to individual algorithm page
+function navigateToAlgorithm(algorithm) {
+    window.location.href = `/disk-scheduling/${algorithm}`;
+}
+
+
+    function renderComparisonChart(results) {
+        const chart = new CanvasJS.Chart("chartContainer", {
+            title: { 
+                text: "Algorithm Performance Comparison",
+                fontSize: 20
+            },
+            axisY: { 
+                title: "Total Head Movement",
+                titleFontSize: 14
+            },
+            data: [{
+                type: "column",
+                dataPoints: Object.entries(results).map(([algorithm, value]) => ({
+                    label: algorithm,
+                    y: value,
+                    click: function() {
+                        // Navigate to algorithm page on bar click
+                        window.location.href = `/disk-scheduling/${ALGORITHM_ROUTES[algorithm]}`;
+                    }
+                }))
+            }],
+            options: {
+                indexLabel: "{y}",
+                indexLabelFontSize: 12,
+                toolTip: {
+                    content: "{label}: {y} movements"
+                }
+            }
+        });
+
+        chart.render();
     }
 });

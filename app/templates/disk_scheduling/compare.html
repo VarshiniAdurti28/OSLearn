@@ -1,12 +1,111 @@
 {% extends 'disk_scheduling/ds_base.html' %}
 
 {% block style %}
-#ds-wiki {
-  display: none;
-}
+<style>
+  .comparison-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .input-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .input-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e3a8a;
+  }
+
+  input {
+    padding: 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+
+  #calc {
+    background: #3b82f6;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  #calc:hover {
+    background: #2563eb;
+  }
+
+  #chartContainer {
+    height: 500px;
+    margin: 2rem 0;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .algorithm-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    border-left: 4px solid #3b82f6;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="comparison-container">
+  <h1>Disk Scheduling Algorithm Comparison</h1>
+
+  <div class="input-group">
+    <div class="input-field">
+      <label for="head">Head Position</label>
+      <input type="number" id="head" required>
+    </div>
+    <div class="input-field">
+      <label for="min">Minimum Cylinder</label>
+      <input type="number" id="min" value="0" readonly>
+    </div>
+    <div class="input-field">
+      <label for="max">Maximum Cylinder</label>
+      <input type="number" id="max" value="199" required>
+    </div>
+  </div>
+
+  <div class="input-field">
+    <label for="reference-string">Reference String (space-separated)</label>
+    <input type="text" id="reference-string" placeholder="Example: 98 183 37 122" required>
+  </div>
+
+  <button id="calc">Compare Algorithms</button>
+
+  <div id="chartContainer"></div>
+
+  <div class="algorithm-info">
+    <h3>About Comparison</h3>
+    <p>Click any algorithm bar to view its detailed visualization and head movement pattern.</p>
+  </div>
+</div>
 {% endblock %}
 
 {% block algo_link %}
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  <script type="module" src="/static/js/disk_scheduling/compare.js"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script type="module" src="/static/js/disk_scheduling/compare.js"></script>
 {% endblock %}

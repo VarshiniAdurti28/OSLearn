@@ -47,6 +47,10 @@ def ds_sstf():
 @app.route('/disk-scheduling/compare', methods=['GET'])
 def ds_compare():
     return render_template('disk_scheduling/compare.html', algo='Comparison')
+    
+@app.route('/disk-scheduling/raid', methods=['GET'])
+def ds_raid():
+    return render_template('disk_scheduling/raid.html', algo='RAID')
 
 @app.route('/file-allocation', methods=['GET'])
 def file_allocation():

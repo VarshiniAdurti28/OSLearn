@@ -1,107 +1,97 @@
 import { getReferenceString } from "./ds_base.js";
 
 $(document).ready(function () {
-    // var dp_fcfs = [];
-    // var dp_sstf = [];
-    // var dp_scan = [];
-    // var dp_scan = [];
-    var dp_look = [];
-    // var dp_clook = [];
-    // var fcfs_values = [];
-    // var sstf_values=[];
-    // var scan_values = [];
-    // var scan_values=[];
-    var look_values = [];
-    // var clook_values = [];
-    var data_look = {};
+  let dp_look = [];
+  let look_values = [];
+  let data_look = {};
 
-    $("#calc").click(function calculate() {
-        look_values = [];
-        dp_look = [];
-        data_look = [];
-        var i;
-        var sum = 0;
-        var diff;
+  $("#calc").click(function calculateLOOK() {
+    look_values = [];
+    dp_look = [];
+    data_look = [];
+    let totalMovement = 0;
 
-        var head = parseInt(document.getElementsByTagName("input")[0].value);
-        var max = parseInt(document.getElementsByTagName("input")[2].value);
-        var min = parseInt(document.getElementsByTagName("input")[1].value);
-        if (head > max) {
-            alert("fcfs head is larger than last cylinder number");
-            return -10;
-        }
+    // Get user inputs
+    const head = parseInt(document.getElementsByTagName("input")[0].value);
+    const min = parseInt(document.getElementsByTagName("input")[1].value);
+    const max = parseInt(document.getElementsByTagName("input")[2].value);
 
-        if (head < min) {
-            alert("fcfs head is smaller than first cylinder number");
-            return -10;
-        }
+    if (head > max || head < min) {
+      alert("The head position must be within the range of cylinders.");
+      return;
+    }
 
-        look_values.push(head);
-        var in_arr = getReferenceString(head, max, min);
-        //sort the inputs
-        in_arr.sort(function (a, b) { return a - b });
+    // Get reference string
+    look_values.push(head);
+    const in_arr = getReferenceString(head, max, min);
+    if (!in_arr.length) {
+      alert("Reference string is empty! Please provide valid inputs.");
+      return;
+    }
 
-        var i, j, flag = 1;
-        for (i = in_arr.length - 1; i >= 0; --i) {
-            var p = parseInt(in_arr[i]);
-            if (p < head) {
-                console.log(i + 1)
-                flag = i + 1;
-                break;
-            }
-        }
-        var p_i;
-        for (j = flag; j < in_arr.length; ++j) {
-            p_i = parseInt(in_arr[j]);
-            look_values.push(p_i);
-            console.log(look_values);
-        }
+    // Sort reference string
+    in_arr.sort((a, b) => a - b);
 
-        for (j = flag - 1; j >= 0; --j) {
-            p_i = parseInt(in_arr[j]);
-            look_values.push(p_i);
-            console.log(look_values);
-        }
+    // Find the breakpoint for higher and lower requests
+    const higher = in_arr.filter((req) => req >= head);
+    const lower = in_arr.filter((req) => req < head).reverse();
 
-        var int = parseInt(in_arr[in_arr.length - 1]);	//last element
-        sum = sum + (int - head);
-
-        var int2 = parseInt(in_arr[0]);
-        sum = sum + (int - int2);
-        console.log(look_values)
-        allocate_look();
-        return sum;
+    // LOOK Algorithm: Move in one direction first, then reverse
+    let current = head;
+    higher.forEach((req) => {
+      totalMovement += Math.abs(current - req);
+      look_values.push(req);
+      current = req;
     });
 
-    function allocate_look() {
-        var d = -1;
-        for (var i = 0; i < look_values.length; ++i) {
-            d++;
-            var a = parseInt(look_values[i]);
-            dp_look.push([a, d]);
-        }
-        data_look = {
-            values: dp_look,
-        };
-        lookModal();
-    }
+    lower.forEach((req) => {
+      totalMovement += Math.abs(current - req);
+      look_values.push(req);
+      current = req;
+    });
 
-    function lookModal() {
-        var max_val = document.getElementsByTagName("input")[2].value;
-        zingchart.render({
-            id: "chartContainer",
-            output: "svg",
-            height: 500,
-            width: "80%",
-            data: {
-                "type": "line",
-                "title": {
-                    "text": "LOOK Header Movement"
-                },
-                "series": [
-                    data_look
-                ]
-            }
-        });
-    }
+    allocateLOOK();
+    alert(`Total head movement with LOOK: ${totalMovement}`);
+    return totalMovement;
+  });
+
+  function allocateLOOK() {
+    look_values.forEach((value, index) => {
+      dp_look.push([value, index]);
+    });
+
+    data_look = {
+      values: dp_look
+    };
+
+    renderLOOKChart();
+  }
+
+  function renderLOOKChart() {
+    zingchart.render({
+      id: "chartContainer",
+      output: "svg",
+      height: 500,
+      width: "80%",
+      data: {
+        type: "line",
+        title: {
+          text: "LOOK Head Movement Visualization"
+        },
+        series: [data_look]
+      },
+      "scale-x": {
+        title: {
+          text: "Request Track Number"
+        }
+      },
+      "scale-y": {
+        title: {
+          text: "Head Movement (Distance)"
+        }
+      }
+    });
+
+    $("#chartContainer").removeClass("hidden");
+  }
 });

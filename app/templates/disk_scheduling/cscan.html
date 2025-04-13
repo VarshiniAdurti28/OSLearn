@@ -6,6 +6,24 @@ CSCAN Disk Scheduling Algorithm
 
 {% block style %}
 <style>
+    .nav-container {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .btn-back {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .btn-back:hover {
+    background-color: #2563eb;
+    color: white;
+  }
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f3f4f6;
@@ -127,4 +145,18 @@ CSCAN Disk Scheduling Algorithm
         <li>More complex than FCFS or simple SCAN.</li>
     </ul>
 </section>
+{% endblock %}
+{% block content %}
+<!-- Existing content -->
+<div class="container">
+    <!-- Your existing form elements -->
+    <div id="chartContainer"></div>
+
+    <!-- Add this navigation section -->
+    <div class="nav-container">
+        <a href="/disk-scheduling/compare" class="btn-back">
+            ← Back to Algorithm Comparison
+        </a>
+    </div>
+</div>
 {% endblock %}

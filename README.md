@@ -54,6 +54,8 @@ This project is developed as a part of the course CS252 - Operating Systems.
         - Best Fit
         - Worst Fit
         - First Fit
+     
+    - Buddy Memory Allocation (Extra)
 - Page Replacement Algorithms
     - LRU
     - Optimal

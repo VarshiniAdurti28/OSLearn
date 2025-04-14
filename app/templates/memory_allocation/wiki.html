@@ -4,42 +4,113 @@
 Memory Allocation
 {% endblock %}
 
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    h4 {
+        font-weight: bold;
+        margin-top: 25px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+        line-height: 1.6;
+    }
+
+    ul {
+        margin-top: 10px;
+    }
+
+    ul > li {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    ul > ul > li {
+        font-weight: normal;
+        margin-left: 20px;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
 <h1>Memory Allocation</h1>
-<h2>MFT</h2>
-<p>MFT (Multiprogramming with a Fixed number of Tasks) is one of the old memory management techniques in which the
-    memory is partitioned into fixed size partitions and each job is assigned to a partition. The memory assigned to a
-    partition does not change.</p>
-<img src="/static/images/mft.png" />
-<ul>
-    <li>Advanatages</li>
+
+<section>
+    <h2>Overview</h2>
+    <p>
+        Memory allocation is a crucial function of operating systems that determines how processes are loaded into memory.
+        There are two main types: Contiguous and Non-Contiguous Memory Allocation.
+    </p>
+
+    <h2>Contiguous Memory Allocation</h2>
+    <p>
+        In this method, each process is allocated a single contiguous block of memory.
+        It is simple and fast but may lead to fragmentation.
+    </p>
+
+    <h4>Methods</h4>
     <ul>
-        <li>Algorithms needed to implement Fixed Partitioning are easy to implement. It simply requires putting a
-            process into a certain partition without focusing on the emergence of Internal and External Fragmentation.
-        </li>
+        <li><strong>Fixed Partitioning</strong> – Memory is divided into fixed-size partitions.</li>
+        <li><strong>Variable Partitioning</strong> – Partitions are created dynamically as needed.</li>
     </ul>
-    <li>Disadvantages</li>
+
     <ul>
-        <li><b>Internal Fragmentation</b>: Main memory use is inefficient. Any program, no matter how small, occupies an
-            entire partition. This can cause internal fragmentation. </li>
-        <li><b>External Fragmentation</b>: The total unused space (as stated above) of various partitions cannot be used
-            to load the processes even though there is space available but not in the contiguous form (as spanning is
-            not allowed).</li>
+        <li>Advantages</li>
+        <ul>
+            <li>Simple to implement and manage</li>
+            <li>Fast memory access due to contiguous layout</li>
+        </ul>
+        <li>Disadvantages</li>
+        <ul>
+            <li>Leads to fragmentation</li>
+            <li>Difficult to resize processes or partitions</li>
+        </ul>
     </ul>
-</ul>
-<div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 25px;">
-    <a href="/memory-allocation/mft/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
-    <a href="/memory-allocation/mft/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>
-    <a href="/memory-allocation/mft/worst-fit"><button class="btn btn-success btn-lg">Worst Fit</button></a>
-</div>
-<h2>MVT</h2>
-<p>MVT (Multiprogramming with a Variable number of Tasks) is the memory management technique in which each job gets just
-    the amount of memory it needs. That is, the partitioning of memory is dynamic and changes as jobs enter and leave
-    the system. MVT is a more ``efficient'' user of resources. MFT suffers with the problem of internal fragmentation
-    and MVT suffers with external fragmentation.</p>
-<div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 25px; margin-bottom: 50px;">
-    <a href="/memory-allocation/mvt/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
-    <a href="/memory-allocation/mvt/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>
-    <a href="/memory-allocation/mvt/worst-fit"><button class="btn btn-success btn-lg">Worst Fit</button></a>
-</div>
+
+    <h2>Non-Contiguous Memory Allocation</h2>
+    <p>
+        Non-contiguous memory allocation allows a process to be divided into several blocks and loaded wherever there is free memory.
+        This reduces fragmentation and improves memory utilization.
+    </p>
+
+    <h4>Methods</h4>
+    <ul>
+        <li><strong>Paging</strong> – Divides memory into fixed-size pages and frames.</li>
+        <li><strong>Segmentation</strong> – Divides programs based on logical segments (code, data, stack, etc).</li>
+        <li><strong>Paging + Segmentation</strong> – Combines both concepts for more flexible allocation.</li>
+    </ul>
+
+    <ul>
+        <li>Advantages</li>
+        <ul>
+            <li>Reduces external fragmentation</li>
+            <li>Efficient use of memory space</li>
+            <li>Allows more flexible process loading</li>
+        </ul>
+        <li>Disadvantages</li>
+        <ul>
+            <li>More complex memory management</li>
+            <li>May incur performance overhead due to address translation</li>
+        </ul>
+    </ul>
+</section>
 {% endblock %}

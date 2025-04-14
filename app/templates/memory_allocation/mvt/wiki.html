@@ -42,10 +42,17 @@ Memory Allocation
         <strong>MVT (Multiprogramming with a Variable number of Tasks)</strong> is a memory management technique where each job gets 
         exactly the amount of memory it needs. Unlike MFT, memory partitioning is dynamic — it changes as jobs enter and exit the system.
     </p>
-    <p>
-        MVT is more efficient in memory usage compared to MFT, as it minimizes internal fragmentation. However, it can suffer from 
-        <strong>external fragmentation</strong> as free memory blocks may be scattered and unusable for larger processes.
-    </p>
+    <ul>
+        <li><strong>Advantages</strong></li>
+        <ul>
+            <li>MVT is more efficient in memory usage compared to MFT.</li>
+            <li>It minimizes internal fragmentation.</li>
+        </ul>
+        <li><strong>Disadvantages</strong></li>
+        <ul>
+            <li>It can suffer from external fragmentation as free memory blocks may be scattered and unusable for larger processes.</li>
+        </ul>
+    </ul>
     <div class="btn-group">
         <a href="/memory-allocation/mvt/best-fit"><button class="btn btn-success btn-lg">Best Fit</button></a>
         <a href="/memory-allocation/mvt/first-fit"><button class="btn btn-success btn-lg">First Fit</button></a>

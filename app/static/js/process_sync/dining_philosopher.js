@@ -4,6 +4,20 @@ const YES = 'Yes';
 const BLANK = '-';
 
 $(document).ready(function () {
+    const philosophers = document.querySelectorAll('.phil');
+    const container = document.getElementById('circle');
+    const rect = container.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const radius = 300;
+
+    philosophers.forEach((el, i) => {
+      const angle = (2 * Math.PI / philosophers.length) * i;
+      const x = centerX + radius * Math.cos(angle);
+      const y = centerY + radius * Math.sin(angle);
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+    });
     $('#next').click(function initiate() {
         const n = Math.floor(Math.random() * 5);
         const change = document.getElementById("num");

@@ -4,8 +4,80 @@
 Process Synchronization
 {% endblock %}
 
+
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    section {
+        text-align: justify;
+        text-justify: inter-word;
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px 50px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    ul#printing {
+        margin-top: 30px;
+    }
+
+    .info-card{
+        display:flex; 
+        flex-direction: column; 
+        justify-content:center;
+        background-color: #F0F8FF;
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: scale(1.02);
+    }
+    
+</style>
+{% endblock %}
+
 {% block body %}
-<h1>Process Synchronization</h1>
+<h1 style="text-align: center;">Process Synchronization</h1>
+
+<section>
+    
 <p>On the basis of synchronization, processes are categorized as one of the following two types:</p>
 <ol>
     <li><b>Independent Process</b>: Execution of one process does not affects the execution of other processes.</li>
@@ -21,26 +93,19 @@ Process Synchronization
     problem must satisfy three requirements:
 <p>
 <ol>
-    <li><b>Mutual Exclusion</b>: If a process is executing in its critical section, then no other process is allowed to
-        execute in the critical section.</li>
-    <li><b>Progress</b>: If no process is executing in the critical section and other processes are waiting outside the
-        critical section, then only those processes that are not executing in their remainder section can participate in
-        deciding which will enter in the critical section next, and the selection can not be postponed indefinitely.
+    <li><b>Mutual Exclusion</b>: Only one process can be in its critical section at any given time. If a process is executing in its critical section, no other process should be allowed to enter theirs.</li>
+    <li><b>Progress</b>: If no process is currently in the critical section and some processes are waiting to enter, the selection of the next process to enter must involve only those that are waiting (not those in their remainder sections), and the decision must not be postponed indefinitely.
     </li>
-    <li>A bound must exist on the number of times that other processes are allowed to enter their critical sections
-        after a process has made a request to enter its critical section and before that request is granted.</li>
+    <li><b>Bounded Waiting</b>: There must be a limit on how many times other processes are allowed to enter their critical sections after a process has made a request to enter its own critical section, ensuring that no process has to wait forever (i.e., avoiding starvation).</li>
 </ol>
-<section>
-    <h2>Problems</h2>
-    <section>
+
+<h2>Classic Synchronisation Problems</h2>
+    <section class="info-card">
         <h3>Dining Philosopher</h3>
-        <p>N philosophers are sitting around a table with N forks between them. Each philosopher must pick up both forks
-            on her left and right before she can start eating. If each philosopher first picks the fork on her left (or
-            right), then all will deadlock while waiting for the other fork. The goal is to come up with an algorithm
-            that lets all philosophers eat, without deadlock or starvation.</p>
+        <p>This problem illustrates a classic synchronization issue where N philosophers sit around a table, each needing two shared forks (left and right) to eat. If every philosopher picks up one fork (say the left) simultaneously, a deadlock occurs as all wait indefinitely for the other fork. Even if deadlock is avoided, some philosophers may starve if others repeatedly get access to the forks. The goal is to design an algorithm that ensures all philosophers can eat without causing deadlock or starvation, maintaining a fair and efficient resource allocation.</p>
         <img src="/static/images/dining_philosopher.png" />
     </section>
-    <section>
+    <section class="info-card">
         <h3>Producer Consumer</h3>
         <p>In this problem, one or more processes produce items into a buffer. Another set of processes consume items
             from the buffer. The buffer can be bounded or unbounded, but let’s discuss the bounded case here. Several
@@ -52,8 +117,24 @@ Process Synchronization
         <p>To solve this problem, we need two counting semaphores – Full and Empty. “Full” keeps track of number of
             items in the buffer at any given time and “Empty” keeps track of number of unoccupied slots.
         </p>
+
+        <img src="/static/images/prod_cons.png" />
     </section>
-    <section>
+
+    <section class="info-card">
+        <h3>Reader Writer</h3>
+        <p>The readers-writers problem relates to any shared resource sucha as an object or file that is shared between multiple processes. Some of these processes are readers i.e. they only want to read the data from the object and some of the processes are writers i.e. they want to write into the object.
+
+            The readers-writers problem is used to manage synchronization so that there are no problems with the object data. For example - If two readers access the object at the same time there is no problem. However if two writers or a reader and writer access the object at the same time, there may be problems.
+            
+            To solve this situation, a writer should get exclusive access to an object i.e. when a writer is accessing the object, no reader or writer may access it. However, multiple readers can access the object at the same time.
+        </p>
+
+        <img src="/static/images/reader_writers.webp" />
+
+    </section>
+
+    <section class="info-card">
         <h3>Sleeping Barber</h3>
         <p>The analogy is based upon a hypothetical barber shop with one barber. There is a barber shop which has one
             barber, one barber chair, and n chairs for waiting for customers if there are any to sit on the chair.</p>
@@ -73,15 +154,8 @@ Process Synchronization
             the barbershop.</p>
         <img src="/static/images/sleeping_barber.png" />
     </section>
-    <section>
-        <h3>Reader Writer</h3>
-        <p>Several processes wish to read and write data shared between them.
-            Some processes only want to read, while others want to update the shared data.
-            Multiple readers may concurrently access the data.
-            However, a writer must not access the data concurrently with anyone else, either a reader or a writer.
-            Reader-writer locks exist precisely to address such problems.
-        </p>
-    </section>
+  
 </section>
+
 
 {% endblock %}

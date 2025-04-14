@@ -4,6 +4,51 @@
 Dining Philosopher
 {% endblock %}
 
+{% block style%}
+	<style>
+		.circle {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 100px auto;
+  border-radius: 50%;
+}
+
+.philosopher {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: url('your-avatar.png') no-repeat center/contain;
+  transform: rotate(calc(72deg * var(--i))) translate(170px) rotate(calc(-72deg * var(--i)));
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  text-align: center;
+}
+
+.center-bowl {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: url('bowl.png') no-repeat center/contain;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.phil{
+	transition: transform 0.2s ease;
+}
+
+
+.phil:hover {
+	transform: scale(1.05);
+}
+
+
+	</style>
+{%endblock%}
+
 {% block link %}
 <script src="/static/js/process_sync/dining_philosopher.js"></script>
 {% endblock %}
@@ -57,25 +102,42 @@ Dining Philosopher
 				</tr>
 			</table>
 		</div>
-		<p style="position:absolute;top:37%;left:41%;">Philosopher 1</p>
+	
 		<p style="position:absolute;top:62%;left:29%;">Philosopher 5</p>
 		<p style="position:absolute;top:48%;left:56.5%;">Philosopher 2</p>
 		<p style="position:absolute;top:106%;left:38%;">Philosopher 4</p>
 		<p style="position:absolute;top:96%;left:56%;">Philosopher 3</p>
-		<button type="button" , id="one" , name="one" ,
-			style="height:125px;width:125px;position: absolute;;top:39%;left:40%;border-radius:25px;border:2px solid #000;  background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+
+		<div class = "phil-container">
+				
+			<p >Philosopher 1</p>
+			<div id="one" , class ="phil", name="one" ,
+				style="height:125px;width:125px;position: absolute;;top:39%;left:40%;border-radius:50px;border:2px solid #000;  background-image: url('/static/images/phil.jpeg') ;
+				background-repeat: no-repeat;
+				background-size: cover;">
+			</div>
+		</div>
+
+
+		<button type="button" , id="five" , class ="phil" , name="one" ,
+			style="height:125px;width:125px;position:absolute;top:65%;left:29%;border-radius:50px;border:1px solid #000; background-image: url('/static/images/phil.jpeg') ;
+			  background-repeat: no-repeat;
+  			background-size: cover;">
 		</button>
-		<button type="button" , id="five" , name="one" ,
-			style="height:125px;width:125px;position:absolute;top:65%;left:29%;border-radius:25px;border:1px solid #000; background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		<button type="button" , class ="phil" ,id="two" , name="one" ,
+			style="height:125px;width:125px;position:absolute;top:50%;left:55.5%;border-radius:50px;border:1px solid #000;background-image: url('/static/images/phil.jpeg') ;
+			  background-repeat: no-repeat;
+  			background-size: cover;">
 		</button>
-		<button type="button" , id="two" , name="one" ,
-			style="height:125px;width:125px;position:absolute;top:50%;left:55.5%;border-radius:25px;border:1px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		<button type="button" , id="four" ,class="phil" ,name="one" ,
+			style="height:125px;width:125px;position:absolute;top:92%;left:37%;border-radius:50px;border:1px solid #000;background-image: url('/static/images/phil.jpeg') ;
+			  background-repeat: no-repeat;
+  			background-size: cover;">
 		</button>
-		<button type="button" , id="four" , name="one" ,
-			style="height:125px;width:125px;position:absolute;top:92%;left:37%;border-radius:25px;border:1px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
-		</button>
-		<button type="button" , id="three" , name="one" ,
-			style="height:125px;width:125px;position:absolute;top:83%;left:55%;border-radius:25px;border:1px solid #000;background-image: url('https://icons.iconarchive.com/icons/icons-land/vista-people/128/Office-Client-Male-Light-icon.png')">
+		<button type="button" , id="three" , class ="phil" ,name="one" ,
+			style="height:125px;width:125px;position:absolute;top:83%;left:55%;border-radius:50px;border:1px solid #000;background-image: url('/static/images/phil.jpeg') ;
+			  background-repeat: no-repeat;
+  			background-size: cover;">
 		</button>
 		<img src="https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/256/32402-cooked-rice-icon.png"
 			style="position: absolute;height: 60px;width: 60px; top: 51%;left:42%;visibility: hidden;" id="bowl1">

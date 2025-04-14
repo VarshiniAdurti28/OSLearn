@@ -1,70 +1,70 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    MVT - Next Fit
+{% block link %}
+  <script type="module" src="/static/js/memory_allocation/mvt/next_fit.js"></script>
 {% endblock %}
 
-{% block link %}
-    <script type="module" src="/static/js/memory_allocation/mvt/next_fit.js"></script>
+{% block title %}
+MVT - Next Fit
 {% endblock %}
 
 {% block style %}
 <style>
-    h1 {
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    h1, h2 {
         text-align: center;
-        font-weight: bold;
+        font-weight: 700;
         margin-top: 30px;
         color: #0a4b78;
     }
 
     section {
         margin: 40px auto;
-        max-width: 1000px;
+        max-width: 1200px;
         padding: 30px;
-        background-color: rgba(144, 213, 255, 0.2);
+        background-color: rgba(144, 213, 255, 0.3);
         border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 0, 139, 0.1);
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
     }
 
-    canvas {
-        border: 1px solid #d3d3d3;
-        margin-top: 10px;
-    }
-
-    table {
-        margin-top: 15px;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    .btn-primary {
-        margin-top: 10px;
+    .form-group label {
+        font-weight: 600;
     }
 
     .row {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
-        gap: 20px;
+        gap: 40px;
+        justify-content: center;
     }
 
     .col-md-3 {
-        flex: 1 1 30%;
+        min-width: 300px;
     }
 
-    label {
-        font-weight: bold;
+    #canvas {
+        margin-top: 30px;
     }
 </style>
 {% endblock %}
 
 {% block body %}
-<h1><center>MVT - Next Fit<center></h1>
+<h1>MVT - Next Fit</h1>
 
 <section>
     <h2>Simulation</h2>
@@ -73,7 +73,7 @@
             <div class="form-group">
                 <label>Size of memory</label>
                 <input type="text" class="form-control" id="mem-size" placeholder="Enter size of memory">
-                <button type="submit" class="btn btn-primary" id="mem-size-btn">Go</button>
+                <button type="submit" class="btn btn-primary mt-2" id="mem-size-btn">Go</button>
             </div>
         </div>
 

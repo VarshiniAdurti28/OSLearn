@@ -29,10 +29,10 @@ This project is developed as a part of the course CS252 - Operating Systems.
 - Process Scheduling
     - FCFS
     - SJF
-    - SRTF
+    - SRTF (Extra)
     - Priority
     - Round Robin
-    - LJF
+    - LJF (Extra)
 - Process Synchronization
     - Dining Philosopher
     - Producer Consumer

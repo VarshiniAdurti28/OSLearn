@@ -88,6 +88,10 @@ def mft_first_fit():
 def mft_worst_fit():
     return render_template('memory_allocation/mft/worst_fit.html', algo='Worst Fit')
 
+@app.route('/memory-allocation/mft/next-fit', methods=['GET'])
+def mft_next_fit():
+    return render_template('memory_allocation/mft/next_fit.html', algo='Next Fit')
+
 @app.route('/memory-allocation/mvt/', methods=['GET'])
 def memory_allocation_mvt():
     return render_template('memory_allocation/mvt/wiki.html')
@@ -103,6 +107,10 @@ def mvt_first_fit():
 @app.route('/memory-allocation/mvt/worst-fit', methods=['GET'])
 def mvt_worst_fit():
     return render_template('memory_allocation/mvt/worst_fit.html', algo='Worst Fit')
+
+@app.route('/memory-allocation/mvt/next-fit', methods=['GET'])
+def mvt_next_fit():
+    return render_template('memory_allocation/mvt/next_fit.html', algo='Next Fit')
 
 @app.route('/page-replacement', methods=['GET'])
 def page_replacement():

@@ -8,9 +8,77 @@
   <script src="/static/js/process_sync/sleeping_barber.js"></script>
 {% endblock %}
 
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    section {
+        text-align: justify;
+        text-justify: inter-word;
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px 50px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    ul#printing {
+        margin-top: 30px;
+    }
+
+    .info-card{
+        display:flex; 
+        flex-direction: column; 
+        justify-content:center;
+        background-color: #F0F8FF;
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: scale(1.02);
+    }
+    
+</style>
+{% endblock %}
+
 {% block body %}
 <h1>Process Synchronization - Sleeping Barber</h1>
-<section>
+<div>
   <h2>Simulation</h2>
   <figure style="display: flex; flex-direction: column; row-gap: 10px;">
     <div style="display: flex; flex-direction: row; justify-content: space-around;">
@@ -48,8 +116,8 @@
         style="height:44%;width:0.5%;position:absolute;top:45%;left:55%;background-color:#E0E0E0"> </button>
       <img src="https://icons.iconarchive.com/icons/hybridworks/yoritsuki/128/Futon-bed-icon.png"
         style="position: absolute;height: 300px;width: 200px; top: 60%;left:64%; " id="bed">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaH5rALeB3t3QfT6y-HKZia9Ag4dSlgKdn_g&s" style="border-radius: 50px; position: absolute;height: 100px;width: 100px; top: 70%;left:66.5%; " id="Sleep">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaH5rALeB3t3QfT6y-HKZia9Ag4dSlgKdn_g&s" style="border-radius: 75px; border-color: black; position: absolute;height: 100px;width: 100px; top: 70%;left:66.5%; " id="Sleep">
     </div>
   </figure>
-</section>
+</div>
 {% endblock %}

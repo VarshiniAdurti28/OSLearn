@@ -8,9 +8,78 @@
   <script src="/static/js/process_sync/reader_writer.js"></script>
 {% endblock %}
 
+
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    section {
+        text-align: justify;
+        text-justify: inter-word;
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px 50px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    ul#printing {
+        margin-top: 30px;
+    }
+
+    .info-card{
+        display:flex; 
+        flex-direction: column; 
+        justify-content:center;
+        background-color: #F0F8FF;
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: scale(1.02);
+    }
+    
+</style>
+{% endblock %}
+
 {% block body %}
   <h1>Process Synchronization - Reader Writer</h1>
-  <section>
+  <div>
     <h2>Simulation</h2>
     <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; row-gap: 2rem;">
       <div style="display: flex; flex-direction: row; column-gap: 4rem;">
@@ -20,15 +89,15 @@
       </div>
       <div>
         <form>
-          <textarea id="textarea" style="height:500px;width:700px;border:solid 1px black;font-size:20px" disabled="false" class="form-control"></textarea>
+          <textarea id="textarea" style="height:250px;width:700px;border:solid 1px black;font-size:20px" disabled="false" class="form-control"></textarea>
         </form>
       </div>
       <div style="display: flex; flex-direction: row; column-gap: 10px;" id="readers">
-        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader1">
-        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader2">
-        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader3">
-        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;" class="img-thumbnail" id="reader4">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem; border-radius: 50px;" class="img-thumbnail" id="reader1">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;  border-radius: 50px;" class="img-thumbnail" id="reader2">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;  border-radius: 50px;" class="img-thumbnail" id="reader3">
+        <img src="https://icons.iconarchive.com/icons/iconshock/super-vista-general/128/administrator-icon.png" style="width: 12rem;  border-radius: 50px;" class="img-thumbnail" id="reader4">
       </div>
     </div>
-  </section>
+  </div>
 {% endblock %}

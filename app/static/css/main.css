@@ -11,7 +11,6 @@
   padding: 1px 0; /* Adjusted padding to reduce height */
 }
 
-
 .navbar-brand {
   font-size: 1.5rem;
   color: #fff;
@@ -62,6 +61,7 @@
   top: 100%;
   left: 0;
   width: 100%;
+  min-width: 220px;
   animation: slideDown 0.3s ease forwards; 
   background-color: #73C2FB;/* Slide-down animation */
 }

@@ -30,6 +30,7 @@ $(document).ready(function () {
           var change = document.getElementById("count");
           change.innerHTML = "Waiting = 5"
       }
+    
   }
   
   function check() {

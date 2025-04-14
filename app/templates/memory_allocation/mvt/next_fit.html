@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    MVT - Next Fit
+{% endblock %}
+
+{% block link %}
+    <script type="module" src="/static/js/memory_allocation/mvt/next_fit.js"></script>
+{% endblock %}
+
+{% block style %}
+<style>
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.1);
+    }
+
+    canvas {
+        border: 1px solid #d3d3d3;
+        margin-top: 10px;
+    }
+
+    table {
+        margin-top: 15px;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .btn-primary {
+        margin-top: 10px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    .col-md-3 {
+        flex: 1 1 30%;
+    }
+
+    label {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1><center>MVT - Next Fit<center></h1>
+
+<section>
+    <h2>Simulation</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Size of memory</label>
+                <input type="text" class="form-control" id="mem-size" placeholder="Enter size of memory">
+                <button type="submit" class="btn btn-primary" id="mem-size-btn">Go</button>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="add-rem-pro-btns"></div>
+            <div id="add-rem-pro"></div>
+            <div id="canvas"></div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="compaction"></div>
+            <div id="input-q-table"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

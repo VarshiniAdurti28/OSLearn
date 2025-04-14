@@ -16,19 +16,18 @@ This project is developed as a part of the course CS252 - Operating Systems.
 ## Running the Website
 ### Setting Up
 - `cd` into `app`
-- Execute `python -m venv venv` to setup a virtual environment
-- Start the virtual environment by executing `venv/Scripts/activate`
+- Execute `python -m venv .venv` to setup a virtual environment
+- Start the virtual environment by executing `.venv/Scripts/activate` or `.venv/bin/activate` (for Linux) 
 - Install pip dependencies using `pip install -r ./requirements.txt`
 ### Running
-- `cd` into `app`
-- Start the virtual environment by executing `venv/Scripts/activate`
+- Make sure you are in the `app` directory and that you have activated the python virtual environment.
 - Execute `flask run`
 - Open `localhost:5000` in your browser (the port may be different for your system)
 
 ## Concepts Covered
 - System Calls
 - Process Scheduling
-    - FCFC
+    - FCFS
     - SJF
     - SRTF
     - Priority
@@ -40,7 +39,7 @@ This project is developed as a part of the course CS252 - Operating Systems.
     - Reader Writer
     - Sleeping Barber (Extra)
 - Disk Scheduling
-    - FCFC
+    - FCFS
     - SCAN
     - CSCAN
     - LOOK
@@ -55,6 +54,8 @@ This project is developed as a part of the course CS252 - Operating Systems.
         - Best Fit
         - Worst Fit
         - First Fit
+     
+    - Buddy Memory Allocation (Extra)
 - Page Replacement Algorithms
     - LRU
     - Optimal

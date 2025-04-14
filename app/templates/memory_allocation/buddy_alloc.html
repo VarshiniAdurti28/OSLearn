@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Buddy Memory Allocation
+{% endblock %}
+
+
+{% block link %}
+<script src="/static/js/memory_allocation/buddy_alloc.js"></script>
+{% endblock %}
+
+{% block style %}
+    <style>
+    
+        .tree {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    
+        .node {
+            position: relative;
+            padding: 10px 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background-color: white;
+            margin: 10px auto;
+            text-align: center;
+            min-width: 80px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+    
+        .node.allocated {
+            background-color: #28a745;
+            color: white;
+            cursor:pointer;
+        }
+
+        .node.allocated:hover {
+            background-color: #28a745;
+            color: white;
+            cursor:pointer;
+        }
+
+        .node.buddy-border {
+            border-color: #ffc107;
+        }
+    
+        .children {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            position: relative;
+        }
+    
+        .children::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background-color: #ccc;
+        }
+    
+        .connector {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 20px;
+            border-top: 2px solid #ccc;
+        }
+    
+        .connector.left {
+            left: 0;
+            border-right: 2px solid #ccc;
+        }
+    
+        .connector.right {
+            right: 0;
+            border-left: 2px solid #ccc;
+        }
+
+        .container{
+            margin: 50px;
+            height: 3000px;
+        }
+    
+  </style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h2 class="mb-4">Buddy Memory Allocation Tree</h2>
+
+    <div class="input-group mb-3">
+      <input type="number" id="requestSize" class="form-control" placeholder="Enter memory size (e.g. 100)">
+      <button class="btn btn-primary" onclick="allocate()">Allocate</button>
+    </div>
+
+    <p class="text-muted">Click on a green block to deallocate. Watch it merge!</p>
+
+    <div id="memoryTree" class="tree"></div>
+</div>
+
+{% endblock %}

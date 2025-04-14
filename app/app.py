@@ -72,6 +72,10 @@ def fa_sequential():
 def memory_allocation():
     return render_template('memory_allocation/wiki.html')
 
+@app.route('/memory-allocation/buddy_allocation', methods=['GET'])
+def memory_allocation_buddyalloc():
+    return render_template('memory_allocation/buddy_alloc.html')
+
 @app.route('/memory-allocation/mft/', methods=['GET'])
 def memory_allocation_mft():
     return render_template('memory_allocation/mft/wiki.html')

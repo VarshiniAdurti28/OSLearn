@@ -8,6 +8,7 @@
 Deadlock - Banker's Algorithm
 {% endblock %}
 
+
 {% block style %}
 <style>
     body {
@@ -127,80 +128,54 @@ Deadlock - Banker's Algorithm
 {% block body %}
 <h1 style="text-align: center;">Banker's Algorithm</h1>
 
-<section>
-    <h2>Overview</h2>
-    <p>
-        The Banker's Algorithm is a deadlock avoidance strategy used in operating systems to ensure that the system always remains in a <strong>safe state</strong>. A safe state is one in which the system can allocate resources to each process in some order and still avoid a deadlock.
-    </p>
-    <p>
-        The algorithm simulates the allocation of predetermined maximum possible resources for each process and checks whether such allocation leads to a system state where all processes can complete. If a process’s resource request does not leave the system in a safe state, the request is denied and postponed until it is safe to grant.
-    </p>
-    <p>
-        The name “Banker's Algorithm” originates from a banking analogy: a banker will not approve a loan unless they can ensure that they will still be able to satisfy the maximum possible needs of all customers, even after the loan is given. Likewise, the OS behaves like a banker, granting resources only if doing so doesn’t compromise the overall system’s safety.
-    </p>
-    <p>
-        The algorithm requires three data structures:
-    </p>
-    <ul>
-        <li><strong>Allocation:</strong> The current number of resources allocated to each process.</li>
-        <li><strong>Max:</strong> The maximum number of resources each process could request.</li>
-        <li><strong>Available:</strong> The number of available resources of each type in the system.</li>
-    </ul>
-    <p>
-        From these, the system calculates the <strong>Need</strong> matrix as: <code>Need[i][j] = Max[i][j] - Allocation[i][j]</code>, where <code>i</code> is the process and <code>j</code> is the resource type.
-    </p>
-    <p>
-        If all processes can finish with the currently available and potentially released resources, the system is in a safe state. Otherwise, the state is unsafe and could lead to a deadlock if a request is granted.
-    </p>
-</section>
+
 
 <section>
-    <h2>Try the Simulation</h2>
+    <h2>Try the Simulation !</h2>
     <div class="container">
         <div class="row">
             <form id="resource" class="col-md-4">
                 <div class="form-group">
                     <label>Number of resource types</label>
-                    <input class="form-control" type="number" onkeyup="BuildFormFields(parseInt(this.value, 10));" />
+                    <input class="form-control" type="number" id="numResources" onkeyup="BuildFormFields(parseInt(this.value, 10)); checkDisplayMatrixInputs();" />
                     <div id="FormFields"></div>
                 </div>
             </form>
 
             <form id="Need" class="col-md-4">
-				<div class="form-group">
-					<label>Number of processes</label>
-					<input class="form-control" type="number" onkeyup="BuildFormFields2(y = parseInt(this.value, 10));" />
-					<h4 style="margin-top: 20px; color: #0a4b78; font-weight: bold;">Enter Need Matrix</h4>
-					<div id="FormFields1"></div>
-				</div>
-			</form>
-			
-			<form id="Alloc" class="col-md-4">
-				<div class="form-group" style="margin-top: 32px;">
-					<h4 style="margin-top: 20px; color: #0a4b78; font-weight: bold;">Enter Allocation Matrix</h4>
-					<div id="FormFields2"></div>
-				</div>
-			</form>
-			
+                <div class="form-group">
+                    <label>Number of processes</label>
+                    <input class="form-control" type="number" id="numProcesses" onkeyup="BuildFormFields2(y = parseInt(this.value, 10)); checkDisplayMatrixInputs();" />
+                    <div id="matrixInputs" style="display: none;">
+                        <h4 style="margin-top: 20px; color: #0a4b78; font-weight: bold;">Enter Need Matrix</h4>
+                        <div id="FormFields1"></div>
+
+                        <h4 style="margin-top: 20px; color: #0a4b78; font-weight: bold;">Enter Allocation Matrix</h4>
+                        <div id="FormFields2"></div>
+                    </div>
+                </div>
+            </form>
         </div>
 
-        <div class="matrix-wrapper">
-            <div class="matrix-box">
-                <h3 style="color: #0a4b78; font-weight: bold;">Need Matrix</h3>
-                <table id="tab_need" class="table table-bordered table-hover text-center"></table>
+        <div id="resultSection" style="display: none;">
+            <div class="matrix-wrapper">
+                <div class="matrix-box">
+                    <h3 style="color: #0a4b78; font-weight: bold;">Need Matrix</h3>
+                    <table id="tab_need" class="table table-bordered table-hover text-center"></table>
+                </div>
+
+                <div class="matrix-box">
+                    <h3 style="color: #0a4b78; font-weight: bold;">Allocation Matrix</h3>
+                    <table id="tab_alloc" class="table table-bordered table-hover text-center"></table>
+                </div>
             </div>
 
-            <div class="matrix-box">
-                <h3 style="color: #0a4b78; font-weight: bold;">Allocation Matrix</h3>
-                <table id="tab_alloc" class="table table-bordered table-hover text-center"></table>
-            </div>
+            <h3 style="margin-top: 40px; color: #0a4b78; font-weight: bold; text-align:center;">Simulation Result</h3>
+            <div id="printing" style="display: none; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); text-align: center;"></div>
         </div>
-
-        <h3 style="margin-top: 40px; color: #0a4b78; font-weight: bold; text-align:center;">Simulation Result</h3>
-        <div id="printing" style="display: none; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); text-align: center;"></div>
 
         <div class="panel-footer">
-            <button class="btn btn-success" onclick="banker()">Run</button>
+            <button class="btn btn-success" onclick="banker(); showResultSection();">Run</button>
         </div>
     </div>
 </section>
@@ -210,6 +185,21 @@ Deadlock - Banker's Algorithm
         document.getElementById("printing").style.display = "none";
         document.getElementById("printing").innerHTML = "";
     };
+
+    function checkDisplayMatrixInputs() {
+        const numProc = document.getElementById("numProcesses").value;
+        const numRes = document.getElementById("numResources").value;
+        const matrixInputs = document.getElementById("matrixInputs");
+        if (numProc && numRes && parseInt(numProc) > 0 && parseInt(numRes) > 0) {
+            matrixInputs.style.display = "block";
+        } else {
+            matrixInputs.style.display = "none";
+        }
+    }
+
+    function showResultSection() {
+        document.getElementById("resultSection").style.display = "block";
+    }
 
     function showResults(content, isSafe) {
         const resultDiv = document.getElementById("printing");

@@ -12,8 +12,12 @@ def index():
 def team():
     return render_template('team.html')
 
+@app.route('/deadlock/wiki/', methods=['GET'])
+def d_bankers_wiki():
+    return render_template('deadlock/wiki.html')
+
 @app.route('/deadlock/bankers/', methods=['GET'])
-def d_bankers():
+def d_bankers_simulation():
     return render_template('deadlock/bankers.html')
 
 @app.route('/disk-scheduling', methods=['GET'])

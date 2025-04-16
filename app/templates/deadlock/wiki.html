@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block link %}
+<script src="/static/js/deadlock/bankers.js"></script>
+{% endblock %}
+
+{% block title %}
+Deadlock - Banker's Algorithm
+{% endblock %}
+
+
+{% block style %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f3f4f6;
+        color: #111;
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 30px;
+        color: #0a4b78;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    section {
+        margin: 40px auto;
+        max-width: 1000px;
+        padding: 30px;
+        background-color: rgba(144, 213, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+    }
+
+    .container {
+        padding: 20px 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #007bff;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-success:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-result {
+        padding: 8px 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .col-md-4,
+    .col-md-6 {
+        flex: 1;
+    }
+
+    .matrix-wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .matrix-box {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .panel-footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    ul#printing {
+        margin-top: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;">Overview</h1>
+
+<section>
+    <h2>About Deadlock</h2>
+
+    <h3>What is a Deadlock?</h3>
+    <p>
+        A <strong>deadlock</strong> is a state in a multi-process system where two or more processes are unable to proceed because each is waiting for the other to release a resource. It’s like two people holding one end of two pencils each and waiting for the other to let go — and no one ever does.
+    </p>
+    <!-- Deadlock Image -->
+    <div style="text-align: center; margin: 20px 0;">
+        <img src="/static/images/deadlock.png" alt="Deadlock Diagram" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <p><em>Figure: Circular wait condition representing a Deadlock</em></p>
+    </div>
+    
+    <p>
+        Deadlocks typically occur when the following four conditions hold simultaneously:
+    </p>
+    <ul>
+        <li><strong>Mutual Exclusion:</strong> Resources cannot be shared.</li>
+        <li><strong>Hold and Wait:</strong> A process holds one resource while waiting for others.</li>
+        <li><strong>No Preemption:</strong> Resources can’t be forcibly taken away.</li>
+        <li><strong>Circular Wait:</strong> A cycle of processes waiting on each other exists.</li>
+    </ul>
+
+    <h3>Deadlock Avoidance</h3>
+    <p>
+        One strategy to avoid deadlocks is to ensure the system never enters an unsafe state. This is where the <strong>Banker's Algorithm</strong> comes in — it acts like a safety checker before granting resources.
+    </p>
+    <h2>About Banker's Algorithm</h2>
+
+    <h3>What is the Banker's Algorithm?</h3>
+    <p>
+        The <strong>Banker's Algorithm</strong> is a deadlock avoidance method named after a banker's approach to approving loans: the banker only grants a loan (resource) if they can guarantee that every customer (process) can be safely satisfied eventually.
+    </p>
+    <p>
+        It ensures the system always remains in a <strong>safe state</strong> — meaning there exists some sequence in which all processes can finish without causing a deadlock.
+    </p>
+
+    <h3>Key Concepts</h3>
+    <ul>
+        <li><strong>Allocation:</strong> Current resources allocated to each process.</li>
+        <li><strong>Max:</strong> Maximum resources each process may need.</li>
+        <li><strong>Available:</strong> Resources currently available in the system.</li>
+        <li><strong>Need:</strong> Calculated as <code>Need[i][j] = Max[i][j] - Allocation[i][j]</code>.</li>
+    </ul>
+
+    <h3>How It Works</h3>
+    <ol>
+        <li>A process requests resources.</li>
+        <li>The algorithm checks if granting the request leads to a safe state.</li>
+        <li>If safe, the resources are granted. Otherwise, the request is postponed.</li>
+    </ol>
+    <!-- Flowchart Image -->
+    <div style="text-align: center; margin: 30px 0;">
+        <img src="/static/images/deadlock_flow.png" alt="Banker's Algorithm Flow" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <p><em>Figure: Banker's Algorithm Decision Flow</em></p>
+    </div>
+    <p>
+        This way, the system avoids unsafe states that might lead to deadlocks while still ensuring fair resource utilization.
+    </p>
+</section>
+
+{% endblock %}

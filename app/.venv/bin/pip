@@ -1,4 +1,4 @@
-#!/home/varshini-adurti/OS_PROJ/main_proj/OSLearn/app/.venv/bin/python
+#!/Users/apple/Desktop/OSLearn/app/.venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys

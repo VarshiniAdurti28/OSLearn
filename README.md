@@ -17,7 +17,8 @@ This project is developed as a part of the course CS252 - Operating Systems.
 ### Setting Up
 - `cd` into `app`
 - Execute `python -m venv .venv` to setup a virtual environment
-- Start the virtual environment by executing `.venv/Scripts/activate` or `.venv/bin/activate` (for Linux) 
+- Start the virtual environment by executing `.venv/Scripts/activate` or `.venv/bin/activate` (for Linux) or `source .venv/bin/activate
+` (for Mac)
 - Install pip dependencies using `pip install -r ./requirements.txt`
 ### Running
 - Make sure you are in the `app` directory and that you have activated the python virtual environment.

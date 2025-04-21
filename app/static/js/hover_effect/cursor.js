@@ -1,12 +1,12 @@
 const container = document.getElementById('container');
 
     // Loop for 14 rows
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < 20; i++) {
       const row = document.createElement('div');
       row.className = 'row';
 
       // Loop for 20 divs in each row
-      for (let j = 0; j < 24; j++) {
+      for (let j = 0; j < 50; j++) {
         const box = document.createElement('div');
         box.className = 'hexagon';
         row.appendChild(box);

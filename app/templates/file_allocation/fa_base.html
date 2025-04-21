@@ -8,6 +8,159 @@
 #vis2 {
   display: none;
 }
+
+body {
+    background: #f5fbff;
+}
+
+h1, h2 {
+    color: #1867b2;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
+section {
+    background: #eaf6ff;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(24, 103, 178, 0.10);
+    margin: 32px auto;
+    padding: 32px 24px;
+    max-width: 900px;
+}
+
+label.form-label {
+    color: #1867b2;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+input.form-control {
+    border: 1.5px solid #b3d8ff;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+input.form-control:focus {
+    border-color: #1867b2;
+    outline: none;
+}
+
+/* Button styling */
+.btn, .w3-button {
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 24px;
+    margin-right: 8px;
+    margin-top: 8px;
+    box-shadow: 0 2px 8px rgba(24, 103, 178, 0.08);
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-success {
+    background: #38b000;
+    color: #fff;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #2d8600;
+}
+
+.btn-danger {
+    background: #ff595e;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #d90429;
+}
+
+.btn-primary {
+    background: #1867b2;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #125087;
+}
+
+
+#algo-div {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(24, 103, 178, 0.08);
+    padding: 28px 20px;
+    margin-top: 18px;
+}
+
+#op1 {
+    color: #1867b2;
+    font-weight: 500;
+    margin-top: 18px;
+}
+
+
+#op {
+    width: 100%;
+    max-width: 700px;    /* Limit the maximum width; adjust as needed */
+    min-width: 320px;    /* Optional: for mobile friendliness */
+    margin: 0 auto;      /* Center the box */
+    overflow-x: auto;    /* Enable horizontal scroll if content is too wide */
+    background: #f9fbff;
+    border-radius: 8px;
+    padding-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(24, 103, 178, 0.08);
+    display: block;
+}
+
+#op > * {
+    min-width: 100%;     /* Ensures content fills the box, but doesn't overflow parent */
+    box-sizing: border-box;
+}
+
+
+#op::-webkit-scrollbar {
+    height: 8px;
+}
+#op::-webkit-scrollbar-thumb {
+    background: #b3d8ff;
+    border-radius: 4px;
+}
+
+
+#can {
+    background: #eaf6ff;
+    border-radius: 8px;
+    margin-top: 22px;
+    box-shadow: 0 1px 6px rgba(24, 103, 178, 0.05);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media (max-width: 700px) {
+    section, #algo-div {
+        padding: 18px 6px;
+        max-width: 99vw;
+    }
+    #can {
+        width: 98vw !important;
+        max-width: 98vw;
+    }
+    #op {
+        max-width: 98vw;
+        min-width: unset;
+    }
+}
+
+
 {% endblock %}
 
 {% block body %}

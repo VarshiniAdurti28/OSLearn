@@ -115,15 +115,12 @@ Memory Allocation
     
     <h2>Buddy Memory Allocation</h2>
     <p>
-        Buddy Memory Allocation is a memory management technique that divides memory into partitions to satisfy memory requests efficiently. <br>
-        It works by splitting memory into blocks of size 2^k and combines ("buddies") or splits them as needed.
+        Buddy Memory Allocation is a memory management technique that divides memory into partitions to satisfy memory requests efficiently. 
+        It works by splitting memory into blocks of size 2^k and combines ("buddies") or splits them as needed.<br>
+        When a request comes in, the allocator finds the smallest block of size 2^k that fits the request.<br>
+        If a larger block is free, it is recursively split into two "buddies" of equal size.<br>
+        When memory is freed, it is merged with its buddy if the buddy is also free, forming a larger block again.<br>
     </p>
-
-    <ul>
-        <li>When a request comes in, the allocator finds the smallest block of size 2^k that fits the request.</li>
-        <li>If a larger block is free, it is recursively split into two "buddies" of equal size.</li>
-        <li>When memory is freed, it is merged with its buddy if the buddy is also free, forming a larger block again.</li>
-    </ul>
 
     <ul>
         <li>Advantages</li>

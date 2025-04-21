@@ -112,5 +112,34 @@ Memory Allocation
             <li>May incur performance overhead due to address translation</li>
         </ul>
     </ul>
+    
+    <h2>Buddy Memory Allocation</h2>
+    <p>
+        Buddy Memory Allocation is a memory management technique that divides memory into partitions to satisfy memory requests efficiently. <br>
+        It works by splitting memory into blocks of size 2^k and combines ("buddies") or splits them as needed.
+    </p>
+
+    <ul>
+        <li>When a request comes in, the allocator finds the smallest block of size 2^k that fits the request.</li>
+        <li>If a larger block is free, it is recursively split into two "buddies" of equal size.</li>
+        <li>When memory is freed, it is merged with its buddy if the buddy is also free, forming a larger block again.</li>
+    </ul>
+
+    <ul>
+        <li>Advantages</li>
+        <ul>
+            <li>Fast Allocation and Deallocation: Due to the use of powers of two and simple binary operations, allocation and freeing are quick.</li>
+            <li>Easy to Merge and Split: Buddies can be merged easily because their addresses differ by exactly one bit.</li>
+            <li>Reduced External Fragmentation: Since memory is divided in powers of two, merging blocks becomes systematic, limiting fragmentation outside the allocated blocks.</li>
+            <li>Simple Implementation: The logic is recursive and clean, making the system relatively easy to implement.</li>
+            </ul>
+        <li>Disadvantages</li>
+        <ul>
+            <li>Internal Fragmentation: A block of size 2^k is allocated even if a slightly smaller size is needed, wasting memory.</li>
+            <li>Overhead in Splitting/Merging: Although fast, frequent splits and merges can introduce some overhead and complexity, especially in real-time systems.</li>
+            <li>Power-of-Two Limitation: Requests not matching 2^k may lead to inefficient space usage.</li>
+            <li>Limited Flexibility: Fixed-size blocks can be less adaptable compared to more dynamic allocators like slab or segregated fits.</li>
+        </ul>
+    </ul>
 </section>
 {% endblock %}

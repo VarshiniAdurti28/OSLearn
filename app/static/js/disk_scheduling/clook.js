@@ -103,3 +103,28 @@ $(document).ready(function () {
     $("#chartContainer").removeClass("hidden");
   }
 });
+
+
+function runCLOOK(head, max, min, refStr = null, silent = false) {
+  let sum = 0;
+  let values = [head];
+  const in_arr = refStr || getReferenceString(head, max, min);
+
+  
+
+  in_arr.sort((a, b) => a - b);
+  let split = in_arr.findIndex(n => n >= head);
+
+  for (let i = split; i < in_arr.length; ++i) values.push(in_arr[i]);
+  for (let i = 0; i < split; ++i) values.push(in_arr[i]);
+
+  for (let i = 1; i < values.length; i++) {
+    sum += Math.abs(values[i] - values[i - 1]);
+  }
+
+ 
+
+  return { name: "CLOOK", totalHeadMovement: sum };
+}
+
+export { runCLOOK };

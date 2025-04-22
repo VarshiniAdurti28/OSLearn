@@ -1,0 +1,13 @@
+{% extends 'page_replacement/pr_base.html' %}
+
+{% block algo_link %}
+  <script type="module" src="/static/js/page_replacement/clock.js"></script>
+{% endblock %}
+
+{% block wiki %}
+  <p>
+    In the Clock (Second Chance) algorithm, pages are arranged in a circular list like a clock.
+    Each page has a reference bit. When a page fault occurs, the algorithm searches for a page
+    with a reference bit of 0 to replace, giving "second chances" to those with bit 1.
+  </p>
+{% endblock %}

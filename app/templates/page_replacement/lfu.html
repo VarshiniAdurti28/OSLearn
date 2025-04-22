@@ -1,0 +1,9 @@
+{% extends 'page_replacement/pr_base.html' %}
+
+{% block algo_link %}
+  <script type="module" src="/static/js/page_replacement/lfu.js"></script>
+{% endblock %}
+
+{% block wiki %}
+  <p>In LFU (Least Frequently Used), the page with the lowest frequency of access is replaced when a new page needs to be loaded into memory.</p>
+{% endblock %}

@@ -6,11 +6,7 @@ app.debug = True
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('hover.html')
-
-@app.route('/home', methods=['GET'])
-def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 @app.route('/team', methods=['GET'])
 def team():
@@ -139,6 +135,18 @@ def pa_lru():
 @app.route('/page-replacement/optimal', methods=['GET'])
 def pa_optimal():
     return render_template('page_replacement/optimal.html', algo='Optimal')
+
+@app.route('/page-replacement/lfu', methods=['GET'])
+def pa_lfu():
+    return render_template('page_replacement/lfu.html', algo='LFU')
+
+@app.route('/page-replacement/mfu', methods=['GET'])
+def pa_mfu():
+    return render_template('page_replacement/mfu.html', algo='MFU')
+
+@app.route('/page-replacement/clock', methods=['GET'])
+def pa_clock():
+    return render_template('page_replacement/clock.html', algo='CLOCK')
 
 @app.route('/paging', methods=['GET'])
 def paging():

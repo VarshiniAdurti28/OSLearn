@@ -2,112 +2,118 @@
 
 {% block style %}
 <style>
-  .comparison-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    color: #111;
   }
 
-  .input-group {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+  h1,
+  h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 30px;
+    color: #0a4b78;
   }
 
-  .input-field {
-    display: flex;
-    flex-direction: column;
+  section {
+    margin: 40px auto;
+    max-width: 1000px;
+    padding: 30px;
+    background-color: rgba(144, 213, 255, 0.3);
+    /* light blue box */
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
+  }
+
+  .container {
+    padding: 20px 0;
   }
 
   label {
     font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #1e3a8a;
   }
 
-  input {
-    padding: 0.8rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 0.5rem;
-    font-size: 1rem;
+  .form-group {
+    margin-bottom: 20px;
   }
 
-  #calc {
-    background: #3b82f6;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
+  .form-control {
+    padding: 8px;
     width: 100%;
-    margin-top: 1rem;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
   }
 
-  #calc:hover {
-    background: #2563eb;
+  .form-group button {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .form-group button:hover {
+    background-color: #0056b3;
   }
 
   #chartContainer {
+    margin-top: 40px;
+    width: 100%;
     height: 500px;
-    margin: 2rem 0;
-    border-radius: 1rem;
-    overflow: hidden;
-  }
-
-  .algorithm-info {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: #f8fafc;
-    border-radius: 0.5rem;
-    border-left: 4px solid #3b82f6;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 </style>
 {% endblock %}
 
+
 {% block content %}
-<div class="comparison-container">
-  <h1>Disk Scheduling Algorithm Comparison</h1>
+<section>
+  <h1>💽 Disk Scheduling Simulation</h1>
 
-  <div class="input-group">
-    <div class="input-field">
+  <div class="container">
+    <h2>🎯 Input Parameters</h2>
+    <div class="form-group">
       <label for="head">Head Position</label>
-      <input type="number" id="head" required>
+      <input type="number" id="head" class="form-control" placeholder="Enter initial head position">
     </div>
-    <div class="input-field">
+
+    <div class="form-group">
       <label for="min">Minimum Cylinder</label>
-      <input type="number" id="min" value="0" readonly>
+      <input type="number" id="min" class="form-control" value="0" readonly>
     </div>
-    <div class="input-field">
+
+    <div class="form-group">
       <label for="max">Maximum Cylinder</label>
-      <input type="number" id="max" value="199" required>
+      <input type="number" id="max" class="form-control" value="199">
     </div>
+
+    <div class="form-group">
+      <label for="reference-string">Reference String</label>
+      <input type="text" id="reference-string" class="form-control" placeholder="e.g. 98 183 37 122 14 124 65 67">
+    </div>
+
+    <div class="form-group">
+      <button id="calc">Compare Algorithms</button>
+    </div>
+
+    <div id="chartContainer"></div>
+
+    <h2>ℹ️ About This Simulation</h2>
+    <p>This tool compares disk scheduling algorithms by total head movement. After running the simulation, click any bar
+      to view details of that algorithm’s operation.</p>
   </div>
-
-  <div class="input-field">
-    <label for="reference-string">Reference String (space-separated)</label>
-    <input type="text" id="reference-string" placeholder="Example: 98 183 37 122" required>
-  </div>
-
-  <button id="calc">Compare Algorithms</button>
-
-  <div id="chartContainer"></div>
-
-  <div class="algorithm-info">
-    <h3>About Comparison</h3>
-    <p>Click any algorithm bar to view its detailed visualization and head movement pattern.</p>
-  </div>
-</div>
+</section>
 {% endblock %}
+
+
+
 
 {% block algo_link %}
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script type="module" src="/static/js/disk_scheduling/compare.js"></script>
-<input type="text" id="reference" placeholder="Enter disk requests separated by commas">
-
 {% endblock %}

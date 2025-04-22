@@ -94,3 +94,33 @@ $(document).ready(function () {
     $("#chartContainer").removeClass("hidden");
   }
 });
+
+
+function runSSTF(head, max, min, refStr = null, silent = false) {
+  let sum = 0;
+  let seek = head;
+  const in_arr = refStr || getReferenceString(head, max, min);
+  const visited = new Array(in_arr.length).fill(false);
+
+  
+
+  for (let i = 0; i < in_arr.length; ++i) {
+    let minDist = Infinity, index = -1;
+    for (let j = 0; j < in_arr.length; ++j) {
+      if (!visited[j] && Math.abs(in_arr[j] - seek) < minDist) {
+        minDist = Math.abs(in_arr[j] - seek);
+        index = j;
+      }
+    }
+    visited[index] = true;
+    sum += Math.abs(in_arr[index] - seek);
+    seek = in_arr[index];
+  }
+
+  
+
+  return { name: "SSTF", totalHeadMovement: sum };
+}
+
+export { runSSTF };
+

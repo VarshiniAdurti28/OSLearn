@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Process Synchronization
+Page Replacement
 {% endblock %}
-
 
 {% block style %}
 <style>
@@ -20,10 +19,6 @@ Process Synchronization
         color: #0a4b78;
     }
 
-    h1 {
-        text-align: center;
-    }
-
     section {
         text-align: justify;
         text-justify: inter-word;
@@ -33,129 +28,68 @@ Process Synchronization
         background-color: rgba(144, 213, 255, 0.3);
         border-radius: 12px;
         box-shadow: 0 0 15px rgba(0, 0, 139, 0.2);
-
     }
 
-    .container {
-        padding: 20px 0;
-    }
-
-    label {
-        font-weight: 600;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .panel-footer {
-        margin-top: 30px;
+    .info-card {
         display: flex;
-        justify-content: center;
-    }
-
-    ul#printing {
-        margin-top: 30px;
-    }
-
-    .info-card{
-        display:flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
         background-color: #F0F8FF;
         transition: transform 0.3s ease;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
     }
 
     .info-card:hover {
         transform: scale(1.02);
     }
-
 </style>
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;">Process Synchronization</h1>
+<h1>Page Replacement</h1>
 
 <section>
+    <p>In operating systems, page replacement algorithms are used when a requested page is not in memory (a page fault), and the system must decide which page to remove to make space for the new one. The goal is to reduce the number of page faults by choosing the best page to evict.</p>
 
-<p>On the basis of synchronization, processes are categorized as one of the following two types:</p>
-<ol>
-    <li><b>Independent Process</b>: Execution of one process does not affects the execution of other processes.</li>
-    <li><b>Cooperative Process</b>: Execution of one process affects the execution of other processes.</li>
-</ol>
-<p>Process synchronization problem arises in the case of Cooperative process also because resources are shared in
-    Cooperative processes.</p>
-<h2>Critical Sections</h2>
-<img src="/static/images/critical_section.png" />
-<p>Critical section is a code segment that can be accessed by only one process at a time. Critical section contains
-    shared variables which need to be synchronized to maintain consistency of data variables. In the entry section, the
-    process requests for entry in the Critical Section. Any solution to the critical section
-    problem must satisfy three requirements:
-<p>
-<ol>
-    <li><b>Mutual Exclusion</b>: Only one process can be in its critical section at any given time. If a process is executing in its critical section, no other process should be allowed to enter theirs.</li>
-    <li><b>Progress</b>: If no process is currently in the critical section and some processes are waiting to enter, the selection of the next process to enter must involve only those that are waiting (not those in their remainder sections), and the decision must not be postponed indefinitely.
-    </li>
-    <li><b>Bounded Waiting</b>: There must be a limit on how many times other processes are allowed to enter their critical sections after a process has made a request to enter its own critical section, ensuring that no process has to wait forever (i.e., avoiding starvation).</li>
-</ol>
+    <h2>Basic Concepts</h2>
+    <p>When a process executes, it requires pages to be loaded into memory. If there are no free frames and a new page needs to be loaded, the operating system must decide which existing page to remove. This decision is made by the page replacement algorithm.</p>
 
-<h2>Classic Synchronisation Problems</h2>
+    <p>A good page replacement algorithm reduces the rate of page faults. Common strategies include:</p>
+
     <section class="info-card">
-        <h3>Dining Philosopher</h3>
-        <p>This problem illustrates a classic synchronization issue where N philosophers sit around a table, each needing two shared forks (left and right) to eat. If every philosopher picks up one fork (say the left) simultaneously, a deadlock occurs as all wait indefinitely for the other fork. Even if deadlock is avoided, some philosophers may starve if others repeatedly get access to the forks. The goal is to design an algorithm that ensures all philosophers can eat without causing deadlock or starvation, maintaining a fair and efficient resource allocation.</p>
-        <img src="/static/images/dining_philosopher.png" />
-    </section>
-    <section class="info-card">
-        <h3>Producer Consumer</h3>
-        <p>In this problem, one or more processes produce items into a buffer. Another set of processes consume items
-            from the buffer. The buffer can be bounded or unbounded, but let’s discuss the bounded case here. Several
-            real life scenarios map to this problem. For example, a disk driver produces disk blocks, and the kernel
-            consumes them and hands them over to waiting processes.</p>
-        <p>Producers and consumers may also need to wait for each other: a consumer must wait for the producer to put
-            something in an empty buffer, and a producer must wait for the consumer to take something out of a full
-            buffer.</p>
-        <p>To solve this problem, we need two counting semaphores – Full and Empty. “Full” keeps track of number of
-            items in the buffer at any given time and “Empty” keeps track of number of unoccupied slots.
-        </p>
-
-        <img src="/static/images/prod_cons.png" />
+        <h3>FIFO (First-In-First-Out)</h3>
+        <p>The oldest page in memory (the one loaded earliest) is removed first. It's simple but not always effective, as it may remove frequently used pages, leading to high page fault rates (this is known as Belady’s Anomaly).</p>
     </section>
 
     <section class="info-card">
-        <h3>Reader Writer</h3>
-        <p>The readers-writers problem relates to any shared resource sucha as an object or file that is shared between multiple processes. Some of these processes are readers i.e. they only want to read the data from the object and some of the processes are writers i.e. they want to write into the object.
-
-            The readers-writers problem is used to manage synchronization so that there are no problems with the object data. For example - If two readers access the object at the same time there is no problem. However if two writers or a reader and writer access the object at the same time, there may be problems.
-
-            To solve this situation, a writer should get exclusive access to an object i.e. when a writer is accessing the object, no reader or writer may access it. However, multiple readers can access the object at the same time.
-        </p>
-
-        <img src="/static/images/reader_writers.webp" />
-
+        <h3>LRU (Least Recently Used)</h3>
+        <p>This algorithm removes the page that hasn’t been used for the longest time. It is based on the assumption that pages used recently will likely be used again soon. LRU provides better performance but can be expensive to implement.</p>
     </section>
 
     <section class="info-card">
-        <h3>Sleeping Barber</h3>
-        <p>The analogy is based upon a hypothetical barber shop with one barber. There is a barber shop which has one
-            barber, one barber chair, and n chairs for waiting for customers if there are any to sit on the chair.</p>
-        <ul>
-            <li>If there is no customer, then the barber sleeps in his own chair.</li>
-            <li>When a customer arrives, he has to wake up the barber.</li>
-            <li>If there are many customers and the barber is cutting a customer’s hair, then the remaining customers
-                either wait if there are empty chairs in the waiting room or they leave if no chairs are empty.</li>
-        </ul>
-        <p>The solution to this problem includes three semaphores
-            First is for the customer which counts the number of customers present in the waiting room (customer in the
-            barber chair is not included because he is not waiting).
-            Second, the barber 0 or 1 is used to tell whether the barber is idle or is working, And the third mutex is
-            used to provide the mutual exclusion which is required for the process to execute.
-            In the solution, the customer has the record of the number of customers waiting in the waiting room if the
-            number of customers is equal to the number of chairs in the waiting room then the upcoming customer leaves
-            the barbershop.</p>
-        <img src="/static/images/sleeping_barber.png" />
+        <h3>Optimal Page Replacement</h3>
+        <p>This is a theoretical model where the system replaces the page that won’t be used for the longest time in the future. While it offers the best possible page fault rate, it requires future knowledge of memory references and is impractical in real systems. It's mainly used for comparison.</p>
     </section>
 
+    <section class="info-card">
+        <h3>Clock (Second Chance)</h3>
+        <p>This is an efficient approximation of LRU. Pages are arranged in a circular buffer with a reference bit. If a page's bit is set to 0, it is replaced; if it’s 1, the bit is cleared and the pointer moves to the next page. This continues until a page with bit 0 is found.</p>
+    </section>
+
+    <section class="info-card">
+        <h3>Counting-Based Algorithms</h3>
+        <p>These include LFU (Least Frequently Used), which removes the page with the lowest access count, and MFU (Most Frequently Used), which does the opposite. However, they may not always reflect actual usage patterns and can be inaccurate or unfair.</p>
+    </section>
+
+    <h2>Performance Metrics</h2>
+    <ul>
+        <li><b>Page Fault Rate:</b> The ratio of page faults to total memory accesses. Lower is better.</li>
+        <li><b>Implementation Complexity:</b> Some algorithms, like LRU, need complex tracking mechanisms.</li>
+        <li><b>Overhead:</b> Algorithms should not consume excessive system resources.</li>
+    </ul>
+
+    <p>Choosing the right page replacement algorithm depends on the system’s needs, available hardware support, and access patterns of the applications running.</p>
 </section>
-
-
 {% endblock %}

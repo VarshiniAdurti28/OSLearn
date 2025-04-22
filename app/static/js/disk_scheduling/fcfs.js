@@ -81,3 +81,27 @@ $(document).ready(function () {
     $("#chartContainer").removeClass("hidden");
   }
 });
+
+
+function runFCFS(head, max, min, refStr = null, silent = false) {
+  let fcfs_values = [head];
+  let sum = 0;
+
+  const in_arr = refStr || getReferenceString(head, max, min);
+ 
+
+  for (let i = 0; i < in_arr.length; ++i) {
+    fcfs_values.push(in_arr[i]);
+  }
+
+  for (let i = 1; i < fcfs_values.length; ++i) {
+    sum += Math.abs(fcfs_values[i] - fcfs_values[i - 1]);
+  }
+
+ 
+
+  return { name: "FCFS", totalHeadMovement: sum };
+}
+
+export { runFCFS };
+
